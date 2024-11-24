@@ -58,6 +58,7 @@
     <UseWinFormsOutOfProcDesigner>False</UseWinFormsOutOfProcDesigner>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MyPregnancyModel.cs" />
     <Compile Include="MySubModule.cs" />
     <Compile Include="MyBehaviors.cs" />
     <Compile Include="MySettings.cs" />

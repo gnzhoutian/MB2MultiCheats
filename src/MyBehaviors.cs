@@ -13,6 +13,8 @@ using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using MCM.Abstractions.Base.Global;
 using NetworkMessages.FromServer;
+using TaleWorlds.CampaignSystem.Actions;
+using TaleWorlds.Localization;
 
 namespace MultiCheats
 {
@@ -32,46 +34,40 @@ namespace MultiCheats
         {
             if (winner != null && winner.IsHero && winner.IsPlayerCharacter)
             {
+                CharacterObject character_obj = new CharacterObject();
+                ItemObject item_obj = new ItemObject();
+                TextObject text_obj = new TextObject();
                 Random rand = new Random();
+
                 int min = (int)GlobalSettings<MySettings>.Instance.ExtraRewardTroopMin;
                 int range = (int)GlobalSettings<MySettings>.Instance.ExtraRewardTroopRange;
                 int rate = (int)GlobalSettings<MySettings>.Instance.ExtraRewardItemRate;
                 int num = Math.Min(rand.Next(min, min + range + 1), MobileParty.MainParty.LimitedPartySize - MobileParty.MainParty.Party.NumberOfAllMembers);
 
+                List<string> reward_items = new List<string>() { "mc_item_dragon_bracer", "mc_item_shadow_horse", "mc_item_dragon_scale_horse_barding", "mc_item_sunset_bow" , "mc_item_eagle_feather_arrows"};
+
                 if (num > 0)
                 {
-                    MobileParty.MainParty.AddElementToMemberRoster(MBObjectManager.Instance.GetObject<CharacterObject>("mc_elite_dragon"), num);
-                    InformationManager.DisplayMessage(new InformationMessage(string.Format("{0}名龙啸卫仰慕您的英姿，决定追随您！", num), new Color?(Colors.Green).Value));
+                    character_obj = MBObjectManager.Instance.GetObject<CharacterObject>("mc_troop_dragon_guard");
+                    MBTextManager.SetTextVariable("MC_Main_Reward_Troop_Name", character_obj.ToString());
+                    MBTextManager.SetTextVariable("MC_Main_Reward_Troop_Num", num.ToString());
+                    text_obj = new TextObject("{=mcMainBehaviorRewardTroop}{MC_Main_Reward_Troop_Num} {MC_Main_Reward_Troop_Name} admire your heroic spirit and decide to follow you!");
+
+                    MobileParty.MainParty.AddElementToMemberRoster(character_obj, num);
+                    InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
                 }
 
-                if (rand.Next(100) < rate)
+                foreach (string reward_item in reward_items)
                 {
-                    MobileParty.MainParty.ItemRoster.AddToCounts(MBObjectManager.Instance.GetObject<ItemObject>("mc_item_armor_longyin"), 1);
-                    InformationManager.DisplayMessage(new InformationMessage("您在竞技大赛中表现出色，额外奖励：龙吟护腕", new Color?(Colors.Green).Value));
-                }
+                    if (rand.Next(100) < rate)
+                    {
+                        item_obj = MBObjectManager.Instance.GetObject<ItemObject>(reward_item);
+                        MBTextManager.SetTextVariable("MC_Main_Reward_Item_Name", item_obj.ToString());
+                        text_obj = new TextObject("{=mcMainBehaviorRewardItem}You performed excellent in the competition and received additional rewards: {MC_Main_Reward_Item_Name}");
 
-                if (rand.Next(100) < rate)
-                {
-                    MobileParty.MainParty.ItemRoster.AddToCounts(MBObjectManager.Instance.GetObject<ItemObject>("mc_item_weapon_luori"), 1);
-                    InformationManager.DisplayMessage(new InformationMessage("您在竞技大赛中表现出色，额外奖励：落日弓", new Color?(Colors.Green).Value));
-                }
-
-                if (rand.Next(100) < rate)
-                {
-                    MobileParty.MainParty.ItemRoster.AddToCounts(MBObjectManager.Instance.GetObject<ItemObject>("mc_item_weapon_diaoling"), 1);
-                    InformationManager.DisplayMessage(new InformationMessage("您在竞技大赛中表现出色，额外奖励：雕翎箭", new Color?(Colors.Green).Value));
-                }
-
-                if (rand.Next(100) < rate)
-                {
-                    MobileParty.MainParty.ItemRoster.AddToCounts(MBObjectManager.Instance.GetObject<ItemObject>("mc_item_horse_jueying"), 1);
-                    InformationManager.DisplayMessage(new InformationMessage("您在竞技大赛中表现出色，额外奖励：绝影", new Color?(Colors.Green).Value));
-                }
-
-                if (rand.Next(100) < rate)
-                {
-                    MobileParty.MainParty.ItemRoster.AddToCounts(MBObjectManager.Instance.GetObject<ItemObject>("mc_item_armor_jueying"), 1);
-                    InformationManager.DisplayMessage(new InformationMessage("您在竞技大赛中表现出色，额外奖励：龙鳞战甲", new Color?(Colors.Green).Value));
+                        MobileParty.MainParty.ItemRoster.AddToCounts(item_obj, 1);
+                        InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
+                    }
                 }
             }
         }
@@ -87,7 +83,13 @@ namespace MultiCheats
                     if (settlement.OwnerClan != null && settlement.OwnerClan.Leader != null && settlement.OwnerClan.Leader.IsHumanPlayerCharacter)
                     {
                         settlement.Town.Loyalty += loyalty;
-                        InformationManager.DisplayMessage(new InformationMessage("家族定居点忠诚：" + settlement.ToString() + " " + settlement.Town.Loyalty.ToString("0.0") + "(+" + loyalty.ToString() + ")", new Color?(Colors.Gray).Value));
+                        MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Name", settlement.ToString());
+                        MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Now", settlement.Town.Loyalty.ToString("0.0"));
+                        MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Add", loyalty.ToString());
+                        TextObject text_obj = new TextObject(
+                            "{=mcMainBehaviorRewardLoyalty}Clan settlement loyalty：{MC_Main_Reward_Loyalty_Name} {MC_Main_Reward_Loyalty_Now}(+{MC_Main_Reward_Loyalty_Add})");
+
+                        InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Gray).Value));
                     }
                 }
             }
@@ -108,19 +110,28 @@ namespace MultiCheats
         {
             if (hero.Clan == Clan.PlayerClan && (bool)GlobalSettings<MySettings>.Instance.AutoTakeBothPerks)
             {
+                TextObject text_obj = new TextObject();
+                MBTextManager.SetTextVariable("MC_Main_Active_Perk_Hero", hero.ToString());
+
                 foreach (PerkObject perk in PerkObject.All)
                 {
                     if (perk.Skill == skill && !hero.GetPerkValue(perk) && hero.GetSkillValue(skill) >= perk.RequiredSkillValue)
                     {
                         if (perk != null)
                         {
+                            MBTextManager.SetTextVariable("MC_Main_Active_Perk_Name", perk.ToString());
+                            text_obj = new TextObject("{=mcMainBehaviorActivePerk}{MC_Main_Active_Perk_Hero} active perk {MC_Main_Active_Perk_Name}");
+
                             hero.HeroDeveloper.AddPerk(perk);
-                            InformationManager.DisplayMessage(new InformationMessage(hero.ToString() + " 激活特性 " + perk.ToString(), new Color?(Colors.Green).Value));
+                            InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
                         }
                         if (perk.AlternativePerk != null)
                         {
+                            MBTextManager.SetTextVariable("MC_Main_Active_Perk_Name", perk.AlternativePerk.ToString());
+                            text_obj = new TextObject("{=mcMainBehaviorActivePerk}{MC_Main_Active_Perk_Hero} active perk {MC_Main_Active_Perk_Name}");
+
                             hero.HeroDeveloper.AddPerk(perk.AlternativePerk);
-                            InformationManager.DisplayMessage(new InformationMessage(hero.ToString() + " 激活特性 " + perk.ToString(), new Color?(Colors.Green).Value));
+                            InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
                         }
                     }
                 }
@@ -145,7 +156,14 @@ namespace MultiCheats
                             hero.HeroDeveloper.UnspentAttributePoints += attrPoints;
                             hero.HeroDeveloper.UnspentFocusPoints += focusPoints;
 
-                            InformationManager.DisplayMessage(new InformationMessage(hero.ToString() + " 追加等级奖励：属性" + attrPoints.ToString() + "点，专精"+ focusPoints.ToString() + '点', new Color?(Colors.Green).Value));
+                            TextObject text_obj = new TextObject();
+                            MBTextManager.SetTextVariable("MC_Main_Reward_Points_Hero", hero.ToString());
+                            MBTextManager.SetTextVariable("MC_Main_Reward_Points_Attr", attrPoints.ToString());
+                            MBTextManager.SetTextVariable("MC_Main_Reward_Points_Focus", focusPoints.ToString());
+
+                            text_obj = new TextObject(
+                                "{=mcMainBehaviorRewardPoints}{MC_Main_Reward_Points_Hero} append level rewards：{MC_Main_Reward_Points_Attr} attribute points，{MC_Main_Reward_Points_Focus} focus points");
+                            InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
                         }
                     }
                 }

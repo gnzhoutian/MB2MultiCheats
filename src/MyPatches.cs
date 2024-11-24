@@ -26,7 +26,7 @@ namespace MultiCheats.Patches
             ItemObject weapon = craftingRef(__instance).GetCurrentCraftedItemObject(false);
             EquipmentElement equipment = new EquipmentElement(weapon);
             int price = Campaign.Current.Models.TradeItemPriceFactorModel.GetPrice(equipment, Campaign.Current.MainParty, null, true, 0, 0, 0);
-            CraftingListPropertyItem valueItem = new CraftingListPropertyItem(new TextObject("价值: ", null), 99999f, (float)price, 0f, CraftingTemplate.CraftingStatTypes.NumStatTypes, false);
+            CraftingListPropertyItem valueItem = new CraftingListPropertyItem(new TextObject("{=mcMainPatchWeaponDesignValue}Value: ", null), 99999f, (float)price, 0f, CraftingTemplate.CraftingStatTypes.NumStatTypes, false);
             valueItem.IsValidForUsage = true;
             primaryPropertyListRef(__instance).Add(valueItem);
         }

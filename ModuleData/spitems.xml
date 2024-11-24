@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Items>
-    <Item id="mc_item_armor_longyin"
-          name="龙吟护腕"
+    <Item id="mc_item_dragon_bracer"
+          name="{=mcItemDragonBracer}Dragon Bracer"
           mesh="khuzait_heavy_armor_bracer"
           culture="Culture.neutral_culture"
           is_merchandise="false"
@@ -20,8 +20,8 @@
         </ItemComponent>
         <Flags Civilian="true" />
     </Item>
-    <Item id="mc_item_horse_jueying"
-          name="绝影"
+    <Item id="mc_item_shadow_horse"
+          name="{=mcItemShadowHorse}Shadow Horse"
           mesh="horse_brown"
           culture="Culture.neutral_culture"
           subtype="horse"
@@ -33,7 +33,7 @@
           Type="Horse">
         <ItemComponent>
             <Horse monster="Monster.horse"
-                   maneuver="20"
+                   maneuver="60"
                    speed="120"
                    charge_damage="120"
                    body_length="120"
@@ -69,8 +69,8 @@
         </ItemComponent>
         <Flags Civilian="true" />
     </Item>
-    <Item id="mc_item_armor_jueying"
-          name="龙鳞战甲"
+    <Item id="mc_item_dragon_scale_horse_barding"
+          name="{=mcItemDragonScaleHorseBarding}Dragon Scale Horse Barding"
           mesh="horse_harness_imperial_b_clotest"
           culture="Culture.neutral_culture"
           subtype="body_armor"
@@ -89,8 +89,8 @@
         </ItemComponent>
         <Flags Civilian="true" />
     </Item>
-    <Item id="mc_item_weapon_luori"
-          name="落日弓"
+    <Item id="mc_item_sunset_bow"
+          name="{=mcItemSunsetBow}Sunset Bow"
           body_name="bo_composite_shotbow_f"
           mesh="shortbow_f"
           is_merchandise="false"
@@ -126,8 +126,8 @@
         </ItemComponent>
         <Flags ForceAttachOffHandPrimaryItemBone="true" />
     </Item>
-    <Item id="mc_item_weapon_diaoling"
-          name="雕翎箭"
+    <Item id="mc_item_eagle_feather_arrows"
+          name="{=mcItemEagleFeatherArrows}Eagle Feather Arrows"
           body_name="bo_capsule_arrow"
           holster_body_name="bo_axe_short"
           mesh="arrow_bl_c"

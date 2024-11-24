@@ -19,19 +19,31 @@ namespace MultiCheats
         // 精炼体力消耗
         public override int GetEnergyCostForRefining(ref Crafting.RefiningFormula refineFormula, Hero hero)
         {
-            return 0;
+            if ((bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost)
+            {
+                return 0;
+            }
+            return base.GetEnergyCostForRefining(ref refineFormula, hero);
         }
 
         // 熔炼体力消耗
         public override int GetEnergyCostForSmelting(ItemObject item, Hero hero)
         {
-            return 0;
+            if ((bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost)
+            {
+                return 0;
+            }
+            return base.GetEnergyCostForSmelting(item, hero);
         }
 
         // 锻造体力消耗
         public override int GetEnergyCostForSmithing(ItemObject item, Hero hero)
         {
-            return 0;
+            if ((bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost)
+            {
+                return 0;
+            }
+            return base.GetEnergyCostForSmithing(item, hero);
         }
 
         // 配件解锁加成
