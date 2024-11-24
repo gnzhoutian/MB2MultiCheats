@@ -71,13 +71,12 @@
 
 ## 致谢
 
-- [重要参考 已采纳 SmithForever ](https://www.nexusmods.com/mountandblade2bannerlord/mods/41)
-- [重要参考 已采纳 SmithValue   ](https://www.nexusmods.com/mountandblade2bannerlord/mods/3184)
-- [重要参考 已采纳 HighLoyalty  ](https://www.nexusmods.com/mountandblade2bannerlord/mods/4933)
-- [重要参考 已采纳 AutoTakePerks](https://www.nexusmods.com/mountandblade2bannerlord/mods/4186)
-- [重要参考 已采纳 OneAttributeAndTwoFocusPerLevel](https://www.nexusmods.com/mountandblade2bannerlord/mods/2165)
-- [重要参考 已开源 Kaoses tweaks](https://www.nexusmods.com/mountandblade2bannerlord/mods/2911)
-
+- [重要参考 已采纳 SmithForever @CalSev](https://www.nexusmods.com/mountandblade2bannerlord/mods/41)
+- [重要参考 已采纳 SmithValue @BMan](https://www.nexusmods.com/mountandblade2bannerlord/mods/3184)
+- [重要参考 已采纳 HighLoyalty @Jim136](https://www.nexusmods.com/mountandblade2bannerlord/mods/4933)
+- [重要参考 已采纳 AutoTakePerks @Fengzi233](https://www.nexusmods.com/mountandblade2bannerlord/mods/4186)
+- [重要参考 已采纳 OneAttributeAndTwoFocusPerLevel @newpaladinx333](https://www.nexusmods.com/mountandblade2bannerlord/mods/2165)
+- [重要参考 已开源 Kaoses tweaks @Kaoses](https://www.nexusmods.com/mountandblade2bannerlord/mods/2911)
 
 [1]: https://github.com/gnzhoutian/MB2MultiCheats.git  "MB2MultiCheats"
 [2]: https://www.nexusmods.com/mountandblade2bannerlord/mods/7470  "MultiCheats"
