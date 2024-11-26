@@ -62,7 +62,7 @@ namespace MultiCheats
                     if (rand.Next(100) < rate)
                     {
                         item_obj = MBObjectManager.Instance.GetObject<ItemObject>(reward_item);
-                        MBTextManager.SetTextVariable("MC_Main_Reward_Item_Name", item_obj.ToString());
+                        MBTextManager.SetTextVariable("MC_Main_Reward_Item_Name", item_obj.Name.ToString());
                         text_obj = new TextObject("{=mcMainBehaviorRewardItem}You performed excellent in the competition and received additional rewards: {MC_Main_Reward_Item_Name}");
 
                         MobileParty.MainParty.ItemRoster.AddToCounts(item_obj, 1);
