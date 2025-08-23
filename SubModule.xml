@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Module>
-    <Name value="MultiCheats"/>
-    <Id value="MultiCheats"/>
+    <Name value="MultiCheatsSanGuo"/>
+    <Id value="MultiCheatsSanGuo"/>
     <Version value="v1.2.0"/>
     <SingleplayerModule value="true"/>
     <MultiplayerModule value="false"/>

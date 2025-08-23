@@ -9,12 +9,13 @@ version=$1
 
 sed -i 's!<Version value=.*$!<Version value="v'${version}'"/>!g' SubModule.xml
 
+mkdir -p ${TMP_PATH}
 pushd ${TMP_PATH}
-    rm -rf MultiCheats
-    mkdir -p MultiCheats
+    rm -rf MultiCheatsSanGuo
+    mkdir -p MultiCheatsSanGuo
 popd
 
-pushd ${TMP_PATH}/MultiCheats
+pushd ${TMP_PATH}/MultiCheatsSanGuo
     cp -af ${TOP_PATH}/bin ./
     cp -af ${TOP_PATH}/ModuleData ./
     cp -af ${TOP_PATH}/LICENSE ./
@@ -25,5 +26,5 @@ pushd ${TMP_PATH}/MultiCheats
     rm -rf src/.vs src/bin src/obj
     rm -f src/MultiCheats.csproj.user
     
-    ${EXE7Z} a ../MultiCheats-${version}.7z ./* -r
+    ${EXE7Z} a ../MultiCheatsSanGuo-${version}.7z ./* -r
 popd

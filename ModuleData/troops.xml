@@ -7,7 +7,7 @@
         occupation="Soldier"
         culture="Culture.neutral_culture">
         <face>
-            <face_key_template value="BodyProperty.fighter_empire"/>
+            <face_key_template value="BodyProperty.villager_yongliang"/>
         </face>
         <skills >
             <skill id="Athletics" value="720"/>
@@ -21,18 +21,16 @@
         </skills>
         <Equipments>
             <EquipmentRoster>
-                <equipment slot="Item0" id="Item.empire_polearm_1_t4"/>
+                <equipment slot="Item0" id="Item.lz_huangzhong_01"/>
                 <equipment slot="Item1" id="Item.mc_item_sunset_bow"/>
                 <equipment slot="Item2" id="Item.mc_item_eagle_feather_arrows"/>
-                <equipment slot="Head" id="Item.imperial_goggled_helmet"/>
-                <equipment slot="Cape" id="Item.desert_scale_shoulders"/>
-                <equipment slot="Body" id="Item.imperial_scale_armor"/>
+                <equipment slot="Head" id="Item.sg_ar_c01_g002_head_lb"/>
+                <equipment slot="Body" id="Item.sg_ar_c01_g002_body_lb"/>
                 <equipment slot="Gloves" id="Item.mc_item_dragon_bracer"/>
-                <equipment slot="Leg" id="Item.decorated_imperial_boots"/>
+                <equipment slot="Leg" id="Item.sg_ar_c01_g002_leg_civilian_lb"/>
+                <equipment slot="Horse" id="Item.mc_item_shadow_horse"/>
+                <equipment slot="HorseHarness" id="Item.mc_item_dragon_scale_horse_barding"/>
             </EquipmentRoster>
-            <EquipmentSet id="empire_troop_civilian_template_t3" civilian="true" />
-            <equipment slot="Horse" id="Item.mc_item_shadow_horse"/>
-            <equipment slot="HorseHarness" id="Item.mc_item_dragon_scale_horse_barding"/>
         </Equipments>
     </NPCCharacter>
 </NPCCharacters>

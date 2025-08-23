@@ -2,12 +2,13 @@
 <Items>
     <Item id="mc_item_dragon_bracer"
           name="{=mcItemDragonBracer}Dragon Bracer"
-          mesh="khuzait_heavy_armor_bracer"
+          mesh="ar_c01_g015_arm"
           culture="Culture.neutral_culture"
           is_merchandise="false"
           multiplayer_item="false"
           weight="1.2"
-          appearance="7"
+          value="480000"
+          appearance="0"
           Type="HandArmor">
         <ItemComponent>
             <Armor head_armor="120"
@@ -18,7 +19,7 @@
                    modifier_group="plate"
                    material_type="Plate" />
         </ItemComponent>
-        <Flags Civilian="true" />
+        <Flags UseTeamColor="false"  Civilian="true" />
     </Item>
     <Item id="mc_item_shadow_horse"
           name="{=mcItemShadowHorse}Shadow Horse"
@@ -30,6 +31,8 @@
           multiplayer_item="false"
           weight="480"
           difficulty="120"
+          value="480000"
+          appearance="0"
           Type="Horse">
         <ItemComponent>
             <Horse monster="Monster.horse"
@@ -46,22 +49,8 @@
                 <Materials>
                     <Material name="horse_brown_mat">
                         <MeshMultipliers>
-                            <MeshMultiplier mesh_multiplier="FF202020" percentage="1.0" />
-                        </MeshMultipliers>
-                    </Material>
-                    <Material name="horse_black_mat">
-                        <MeshMultipliers>
-                            <MeshMultiplier mesh_multiplier="FF202020" percentage="1.0" />
-                        </MeshMultipliers>
-                    </Material>
-                    <Material name="horse_grey_mat">
-                        <MeshMultipliers>
-                            <MeshMultiplier mesh_multiplier="FF202020" percentage="1.0" />
-                        </MeshMultipliers>
-                    </Material>
-                    <Material name="horse_white_mat">
-                        <MeshMultipliers>
-                            <MeshMultiplier mesh_multiplier="FF202020" percentage="1.0" />
+                            <MeshMultiplier mesh_multiplier="FF010101" percentage="0.75" />
+                            <MeshMultiplier mesh_multiplier="FF909090" percentage="0.25" />
                         </MeshMultipliers>
                     </Material>
                 </Materials>
@@ -71,35 +60,42 @@
     </Item>
     <Item id="mc_item_dragon_scale_horse_barding"
           name="{=mcItemDragonScaleHorseBarding}Dragon Scale Horse Barding"
-          mesh="horse_harness_imperial_b_clotest"
+          mesh="hh_c01_001_b"
           culture="Culture.neutral_culture"
-          subtype="body_armor"
           is_merchandise="false"
           multiplayer_item="false"
           weight="24"
           difficulty="0"
-          appearance="0.5"
+          value="480000"
+          appearance="1"
           Type="HorseHarness">
         <ItemComponent>
             <Armor body_armor="240"
+                   hair_cover_type="all"
+                   covers_head="true"
                    mane_cover_type="all"
+                   maneuver_bonus="0"
+                   speed_bonus="0"
+                   reins_mesh="horse_harness_a_new_rein"
+                   charge_bonus="0"
                    family_type="1"
-                   reins_mesh="horse_harness_imperial_b_rein"
+                   modifier_group="chain"
                    material_type="Chainmail" />
         </ItemComponent>
         <Flags Civilian="true" />
     </Item>
     <Item id="mc_item_sunset_bow"
           name="{=mcItemSunsetBow}Sunset Bow"
-          body_name="bo_composite_shotbow_f"
-          mesh="shortbow_f"
+          body_name="bo_sg_longbow_003"
+          mesh="sg_longbow_003"
           is_merchandise="false"
           multiplayer_item="false"
           weight="0.8"
           difficulty="120"
+          value="480000"
           appearance="0.1"
           Type="Bow"
-          item_holsters="bow_back_2:bow_hip:bow_hip_2:bow_back">
+          item_holsters="bow_hip:bow_hip_2:bow_back:bow_back_2">
         <ItemComponent>
             <Weapon weapon_class="Bow"
                     ammo_class="Arrow"
@@ -113,7 +109,7 @@
                     thrust_damage_type="Blunt"
                     item_usage="bow"
                     physics_material="wood_weapon"
-                    center_of_mass="0,0,0"
+                    center_of_mass="0.1,0,-0.15"
                     modifier_group="bow">
                 <WeaponFlags RangedWeapon="true"
                              HasString="true"
@@ -130,17 +126,18 @@
           name="{=mcItemEagleFeatherArrows}Eagle Feather Arrows"
           body_name="bo_capsule_arrow"
           holster_body_name="bo_axe_short"
-          mesh="arrow_bl_c"
-          holster_mesh="arrow_bl_c_quiver"
-          holster_mesh_with_weapon="arrow_bl_c_quiver"
+          mesh="arrow_bl_a"
+          holster_mesh="arrow_bl_a_quiver"
+          holster_mesh_with_weapon="arrow_bl_a_quiver"
           is_merchandise="false"
           multiplayer_item="false"
           weight="0.01"
           flying_mesh="arrow_bl_flying"
-          appearance="1"
+          value="480000"
+          appearance="0.1"
           Type="Arrows"
-          item_holsters="quiver_back_middle:quiver_bolts_2:quiver_bolts"
-          holster_position_shift="0.0,0.0,0.15">
+          item_holsters="quiver_back_top:quiver_back_top_2"
+          holster_position_shift="0,0,0.15">
         <ItemComponent>
             <Weapon weapon_class="Arrow"
                     stack_amount="240"
