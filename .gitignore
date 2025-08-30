@@ -2,3 +2,4 @@
 /src/obj/
 /src/bin/
 /src/*csproj.user
+/tmpbuild/

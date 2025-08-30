@@ -2,7 +2,7 @@
 # usage: make7z.sh 1.2.0
 set -x -e
 TOP_PATH=$(cd `dirname $0`; pwd) ;cd $TOP_PATH
-TMP_PATH=${TOP_PATH}/../tmpbuild
+TMP_PATH=${TOP_PATH}/tmpbuild
 EXE7Z=${TOP_PATH}/tools/7za.exe
 
 version=$1

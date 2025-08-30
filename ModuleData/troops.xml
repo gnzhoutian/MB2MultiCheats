@@ -2,7 +2,7 @@
 <NPCCharacters>
     <NPCCharacter id="mc_troop_dragon_guard"
         default_group="HorseArcher"
-        level="31"
+        level="36"
         name="{=mcTroopDragonGuard}Dragon Guard"
         occupation="Soldier"
         culture="Culture.neutral_culture">
@@ -21,7 +21,7 @@
         </skills>
         <Equipments>
             <EquipmentRoster>
-                <equipment slot="Item0" id="Item.lz_huangzhong_01"/>
+                <equipment slot="Item0" id="Item.lz_xuhuang_01"/>
                 <equipment slot="Item1" id="Item.mc_item_sunset_bow"/>
                 <equipment slot="Item2" id="Item.mc_item_eagle_feather_arrows"/>
                 <equipment slot="Head" id="Item.sg_ar_c01_g002_head_lb"/>
