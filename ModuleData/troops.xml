@@ -2,7 +2,7 @@
 <NPCCharacters>
     <NPCCharacter id="mc_troop_dragon_guard"
         default_group="HorseArcher"
-        level="36"
+        level="48"
         name="{=mcTroopDragonGuard}Dragon Guard"
         occupation="Soldier"
         culture="Culture.neutral_culture">

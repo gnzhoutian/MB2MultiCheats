@@ -35,6 +35,7 @@ namespace MultiCheats
             {
                 gameStarterObject.AddModel(new MySmithingModel());
                 gameStarterObject.AddModel(new MyCharacterDevelopmentModel());
+                gameStarterObject.AddModel(new MyBattleRewardModel());
 
                 if (gameStarterObject is CampaignGameStarter starter)
                 {
