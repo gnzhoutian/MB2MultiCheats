@@ -38,15 +38,16 @@
     - 自由锻造经验加成，方便角色快速升级
 - 定居点
     - 每日奖励忠诚
-- 生育
+- 选项
     - 禁用孕妇难产死亡
     - 禁用婴儿小产死亡
+    - 战利品价值关联流氓习气等级，并均分优质前缀概率
 
 
 ## 附录一、简易开发说明
 
 - 安装`VS2022`、目标框架：`.NET Framework 4.7.2`
-- 导入项目后配置引用三个路径后即可编译
+- 导入项目后配置引用三个路径后即可编译(调试 -> MultiCheats属性)
     - `<MB2_INSTALL_DIR>\bin\Win64_Shipping_Client\`
     - `<MB2_INSTALL_DIR>\Modules\Bannerlord.Harmony\bin\Win64_Shipping_Client\`
     - `<MB2_INSTALL_DIR>\Modules\Bannerlord.MBOptionScreen\bin\Win64_Shipping_Client\`

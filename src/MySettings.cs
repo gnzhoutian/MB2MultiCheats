@@ -125,13 +125,18 @@ namespace MultiCheats
 
         [SettingProperty("{=mcConfigPregnancyText1}Disable maternal mortality", Order = 0, RequireRestart = false, 
             HintText = "{=mcConfigPregnancyDesc1}Disable maternal mortality, the default is false, and true is recommended")]
-        [SettingPropertyGroup("{=mcConfigPregnancy}Pregnancy", GroupOrder = 5)]
+        [SettingPropertyGroup("{=mcConfigOption}Options", GroupOrder = 5)]
         public bool CloseMaternalMortality { get; set; } = false;
 
         [SettingProperty("{=mcConfigPregnancyText2}Disable stillbirth", Order = 1, RequireRestart = false, 
             HintText = "{=mcConfigPregnancyDesc2}Disable stillbirth, the default is false, and true is recommended")]
-        [SettingPropertyGroup("{=mcConfigPregnancy}Pregnancy", GroupOrder = 5)]
+        [SettingPropertyGroup("{=mcConfigOption}Options", GroupOrder = 5)]
         public bool CloseStillbirth { get; set; } = false;
+
+        [SettingProperty("{=mcConfigLootedText1}Gain Looted Item Value", Order = 2, RequireRestart = false,
+            HintText = "{=mcConfigLootedDesc1}Gain expected looted item value with roguery level, and divide the probability of high-quality prefixes equally, the default is false, and true is recommended")]
+        [SettingPropertyGroup("{=mcConfigOption}Options", GroupOrder = 5)]
+        public bool GainLootedItemValue { get; set; } = false;
     }
 }
 
