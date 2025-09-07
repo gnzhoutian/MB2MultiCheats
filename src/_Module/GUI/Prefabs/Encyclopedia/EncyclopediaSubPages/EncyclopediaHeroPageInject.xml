@@ -1,0 +1,18 @@
+﻿<Prefab>
+    <Constants>
+    </Constants>
+
+    <Window>
+        <!--Talk button-->
+        <Widget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" VerticalAlignment="Top" HorizontalAlignment="Center" >
+            <Children>
+                <ButtonWidget DataSource="{HeroCharacter}" DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="227" SuggestedHeight="40" Brush="ButtonBrush2" UpdateChildrenStates="true" Command.Click="CallToTalk" IsVisible="@CanTalkTo" IsEnabled="@WillNotTalk">
+                    <Children>
+                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Kingdom.GeneralButtons.Text" Text="@CallToTalkText" />
+                    </Children>
+                </ButtonWidget>
+                <HintWidget DataSource="{SendMessengerHint}" DoNotAcceptEvents="true" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" Command.HoverBegin="ExecuteBeginHint" Command.HoverEnd="ExecuteEndHint" IsEnabled="false"/>
+            </Children>
+        </Widget>
+    </Window>
+</Prefab>
