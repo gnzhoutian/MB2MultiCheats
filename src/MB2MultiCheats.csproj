@@ -80,7 +80,6 @@
     <Reference Include="TaleWorlds.Localization, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />
     <Reference Include="TaleWorlds.MountAndBlade, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />
     <Reference Include="TaleWorlds.ObjectSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />
-    <Reference Include="TaleWorlds.SaveSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
