@@ -34,39 +34,33 @@ namespace MB2MultiCheats
         {
             if (winner != null && winner.IsHero && winner.IsPlayerCharacter)
             {
-                CharacterObject character_obj = new CharacterObject();
-                ItemObject item_obj = new ItemObject();
-                TextObject text_obj = new TextObject();
-                Random rand = new Random();
+                int min = GlobalSettings<MySettings>.Instance.ExtraRewardTroopMin;
+                int range = GlobalSettings<MySettings>.Instance.ExtraRewardTroopRange;
+                int rate = GlobalSettings<MySettings>.Instance.ExtraRewardItemRate;
 
-                int min = (int)GlobalSettings<MySettings>.Instance.ExtraRewardTroopMin;
-                int range = (int)GlobalSettings<MySettings>.Instance.ExtraRewardTroopRange;
-                int rate = (int)GlobalSettings<MySettings>.Instance.ExtraRewardItemRate;
-                int num = Math.Min(rand.Next(min, min + range + 1), MobileParty.MainParty.LimitedPartySize - MobileParty.MainParty.Party.NumberOfAllMembers);
+                int num = Math.Min(MCRand.RandNum(min, range),MobileParty.MainParty.LimitedPartySize - MobileParty.MainParty.Party.NumberOfAllMembers);
 
                 List<string> reward_items = new List<string>() { "mc_item_dragon_bracer", "mc_item_shadow_horse", "mc_item_dragon_scale_horse_barding", "mc_item_sunset_bow" , "mc_item_eagle_feather_arrows"};
 
                 if (num > 0)
                 {
-                    character_obj = MBObjectManager.Instance.GetObject<CharacterObject>("mc_troop_dragon_guard");
+                    CharacterObject character_obj = MBObjectManager.Instance.GetObject<CharacterObject>("mc_troop_dragon_guard");
+                    MobileParty.MainParty.AddElementToMemberRoster(character_obj, num);
+
                     MBTextManager.SetTextVariable("MC_Main_Reward_Troop_Name", character_obj.ToString());
                     MBTextManager.SetTextVariable("MC_Main_Reward_Troop_Num", num.ToString());
-                    text_obj = new TextObject("{=mcMainBehaviorRewardTroop}{MC_Main_Reward_Troop_Num} {MC_Main_Reward_Troop_Name} admire your heroic spirit and decide to follow you!");
-
-                    MobileParty.MainParty.AddElementToMemberRoster(character_obj, num);
-                    InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
+                    MCLog.Info("{=mcMainBehaviorRewardTroop}{MC_Main_Reward_Troop_Num} {MC_Main_Reward_Troop_Name} admire your heroic spirit and decide to follow you!");
                 }
 
                 foreach (string reward_item in reward_items)
                 {
-                    if (rand.Next(100) < rate)
+                    if (MCRand.RandBool(rate))
                     {
-                        item_obj = MBObjectManager.Instance.GetObject<ItemObject>(reward_item);
-                        MBTextManager.SetTextVariable("MC_Main_Reward_Item_Name", item_obj.Name.ToString());
-                        text_obj = new TextObject("{=mcMainBehaviorRewardItem}You performed excellent in the competition and received additional rewards: {MC_Main_Reward_Item_Name}");
-
+                        ItemObject item_obj = MBObjectManager.Instance.GetObject<ItemObject>(reward_item);
                         MobileParty.MainParty.ItemRoster.AddToCounts(item_obj, 1);
-                        InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
+
+                        MBTextManager.SetTextVariable("MC_Main_Reward_Item_Name", item_obj.Name.ToString());
+                        MCLog.Info("{=mcMainBehaviorRewardItem}You performed excellent in the competition and received additional rewards: {MC_Main_Reward_Item_Name}");
                     }
                 }
             }
@@ -83,13 +77,11 @@ namespace MB2MultiCheats
                     if (settlement.OwnerClan != null && settlement.OwnerClan.Leader != null && settlement.OwnerClan.Leader.IsHumanPlayerCharacter)
                     {
                         settlement.Town.Loyalty += loyalty;
+
                         MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Name", settlement.ToString());
                         MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Now", settlement.Town.Loyalty.ToString("0.0"));
                         MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Add", loyalty.ToString());
-                        TextObject text_obj = new TextObject(
-                            "{=mcMainBehaviorRewardLoyalty}Clan settlement loyalty：{MC_Main_Reward_Loyalty_Name} {MC_Main_Reward_Loyalty_Now}(+{MC_Main_Reward_Loyalty_Add})");
-
-                        InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Gray).Value));
+                        MCLog.Debug("{=mcMainBehaviorRewardLoyalty}Clan settlement loyalty：{MC_Main_Reward_Loyalty_Name} {MC_Main_Reward_Loyalty_Now}(+{MC_Main_Reward_Loyalty_Add})");
                     }
                 }
             }
@@ -110,7 +102,6 @@ namespace MB2MultiCheats
         {
             if (hero.Clan == Clan.PlayerClan && (bool)GlobalSettings<MySettings>.Instance.AutoTakeBothPerks)
             {
-                TextObject text_obj = new TextObject();
                 MBTextManager.SetTextVariable("MC_Main_Active_Perk_Hero", hero.ToString());
 
                 foreach (PerkObject perk in PerkObject.All)
@@ -119,25 +110,22 @@ namespace MB2MultiCheats
                     {
                         if (perk != null)
                         {
-                            MBTextManager.SetTextVariable("MC_Main_Active_Perk_Name", perk.ToString());
-                            text_obj = new TextObject("{=mcMainBehaviorActivePerk}{MC_Main_Active_Perk_Hero} active perk {MC_Main_Active_Perk_Name}");
-
                             hero.HeroDeveloper.AddPerk(perk);
-                            InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
+
+                            MBTextManager.SetTextVariable("MC_Main_Active_Perk_Name", perk.ToString());
+                            MCLog.Info("{=mcMainBehaviorActivePerk}{MC_Main_Active_Perk_Hero} active perk {MC_Main_Active_Perk_Name}");
                         }
                         if (perk.AlternativePerk != null)
                         {
-                            MBTextManager.SetTextVariable("MC_Main_Active_Perk_Name", perk.AlternativePerk.ToString());
-                            text_obj = new TextObject("{=mcMainBehaviorActivePerk}{MC_Main_Active_Perk_Hero} active perk {MC_Main_Active_Perk_Name}");
-
                             hero.HeroDeveloper.AddPerk(perk.AlternativePerk);
-                            InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
+
+                            MBTextManager.SetTextVariable("MC_Main_Active_Perk_Name", perk.AlternativePerk.ToString());
+                            MCLog.Info("{=mcMainBehaviorActivePerk}{MC_Main_Active_Perk_Hero} active perk {MC_Main_Active_Perk_Name}");
                         }
                     }
                 }
             }
         }
-
 
         // 家族成员对话后追加属性点专精点等级奖励
         private void CompanionAppendAttributeAndFocus(IEnumerable<CharacterObject> heros)
@@ -156,14 +144,10 @@ namespace MB2MultiCheats
                             hero.HeroDeveloper.UnspentAttributePoints += attrPoints;
                             hero.HeroDeveloper.UnspentFocusPoints += focusPoints;
 
-                            TextObject text_obj = new TextObject();
                             MBTextManager.SetTextVariable("MC_Main_Reward_Points_Hero", hero.ToString());
                             MBTextManager.SetTextVariable("MC_Main_Reward_Points_Attr", attrPoints.ToString());
                             MBTextManager.SetTextVariable("MC_Main_Reward_Points_Focus", focusPoints.ToString());
-
-                            text_obj = new TextObject(
-                                "{=mcMainBehaviorRewardPoints}{MC_Main_Reward_Points_Hero} append level rewards：{MC_Main_Reward_Points_Attr} attribute points，{MC_Main_Reward_Points_Focus} focus points");
-                            InformationManager.DisplayMessage(new InformationMessage(text_obj.ToString(), new Color?(Colors.Green).Value));
+                            MCLog.Info("{=mcMainBehaviorRewardPoints}{MC_Main_Reward_Points_Hero} append level rewards：{MC_Main_Reward_Points_Attr} attribute points，{MC_Main_Reward_Points_Focus} focus points");
                         }
                     }
                 }

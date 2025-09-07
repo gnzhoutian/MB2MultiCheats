@@ -24,7 +24,7 @@ namespace MB2MultiCheats
         public override EquipmentElement GetLootedItemFromTroop(CharacterObject character, float targetValue)
         {
             EquipmentElement randomItem = base.GetLootedItemFromTroop(character, targetValue);
-            if (randomItem.ItemModifier != null && randomItem.ItemModifier.PriceMultiplier > 1f && (bool)GlobalSettings<MySettings>.Instance.GainLootedItemValue)
+            if (randomItem.ItemModifier != null && randomItem.ItemModifier.PriceMultiplier > 1f && MCRand.RandBool(GlobalSettings<MySettings>.Instance.GainLootedItemRate))
             {
                 MBList<ItemModifier> _itemModifiers = new MBList<ItemModifier>();
                 foreach (ItemModifier itemModifier in randomItem.Item.ItemComponent.ItemModifierGroup.ItemModifiers)
@@ -42,11 +42,11 @@ namespace MB2MultiCheats
             return randomItem;
         }
 
-
         // 战利品最大价值增益，关联流氓习气等级
         public override float GetExpectedLootedItemValue(CharacterObject character)
         {
-            if ((bool)GlobalSettings<MySettings>.Instance.GainLootedItemValue)
+
+            if (MCRand.RandBool(GlobalSettings<MySettings>.Instance.GainLootedItemRate))
             {
                 return (float)(character.Level * character.Level * MobileParty.MainParty.LeaderHero.GetSkillValue(DefaultSkills.Roguery));
             }

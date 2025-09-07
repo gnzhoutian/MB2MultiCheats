@@ -23,8 +23,7 @@ namespace MB2MultiCheats
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                InformationManager.DisplayMessage(new InformationMessage(ex.Message));
+                MCLog.Error(ex);
             }
         }
 
@@ -44,8 +43,7 @@ namespace MB2MultiCheats
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                InformationManager.DisplayMessage(new InformationMessage(ex.Message));
+                MCLog.Error(ex);
             }
         }
     }

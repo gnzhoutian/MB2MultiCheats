@@ -25,7 +25,6 @@ namespace MB2MultiCheats
                     return 0f;
                 }
                 return 0.015f;
-                    
             }
         }
 
