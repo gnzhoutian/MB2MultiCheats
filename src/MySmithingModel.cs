@@ -12,7 +12,7 @@ using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using MCM.Abstractions.Base.Global;
 
-namespace MultiCheats
+namespace MB2MultiCheats
 {
     class MySmithingModel : DefaultSmithingModel
     {

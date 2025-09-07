@@ -16,7 +16,7 @@ using NetworkMessages.FromServer;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Localization;
 
-namespace MultiCheats
+namespace MB2MultiCheats
 {
     public class MyBehaviors : CampaignBehaviorBase
     {

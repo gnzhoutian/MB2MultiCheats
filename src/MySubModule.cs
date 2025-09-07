@@ -10,7 +10,7 @@ using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem;
 
-namespace MultiCheats
+namespace MB2MultiCheats
 {
     class MySubModule : MBSubModuleBase
     {
@@ -19,7 +19,7 @@ namespace MultiCheats
             base.OnSubModuleLoad();
             try
             {
-                new Harmony("MultiCheats").PatchAll();
+                new Harmony("MB2MultiCheats").PatchAll();
             }
             catch (Exception ex)
             {

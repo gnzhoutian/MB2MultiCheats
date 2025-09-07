@@ -13,7 +13,7 @@ using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting;
 using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
 
 
-namespace MultiCheats.Patches
+namespace MB2MultiCheats.Patches
 {
     // 锻造显示价值 -> Add the value to the property list
     [HarmonyPatch(typeof(WeaponDesignVM), "RefreshStats")]

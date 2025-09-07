@@ -1,7 +1,7 @@
 #!/bin/bash
 # usage: make7z.sh 1.2.0
 set -x -e
-MOD_NAME=MultiCheats
+MOD_NAME=MB2MultiCheats
 TOP_PATH=$(cd `dirname $0`; pwd); cd $TOP_PATH
 
 version=$1
@@ -15,7 +15,7 @@ pushd tmpbuild/${MOD_NAME}
 	cp -af ${TOP_PATH}/LICENSE ./
 	cp -af ${TOP_PATH}/README.md ./
 	
-	${TOP_PATH}/tools/7za.exe a ../${MOD_NAME}-${version}.7z ./* -r
+	${TOP_PATH}/tools/7za.exe a -r ../${MOD_NAME}-${version}.7z ./*
 popd
 
 

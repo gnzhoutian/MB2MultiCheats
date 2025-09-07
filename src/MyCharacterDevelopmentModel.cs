@@ -13,7 +13,8 @@ using MCM.Abstractions.Base.Global;
 using TaleWorlds.Localization;
 
 
-namespace MultiCheats { 
+namespace MB2MultiCheats
+{
 
     class MyCharacterDevelopmentModel : DefaultCharacterDevelopmentModel
     {

@@ -16,7 +16,7 @@ using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.ObjectSystem;
 
 
-namespace MultiCheats
+namespace MB2MultiCheats
 {
     class MyBattleRewardModel: DefaultBattleRewardModel
     {

@@ -12,7 +12,7 @@ using TaleWorlds.CampaignSystem.GameComponents;
 using MCM.Abstractions.Base.Global;
 
 
-namespace MultiCheats
+namespace MB2MultiCheats
 {
     internal class MyPregnancyModel: DefaultPregnancyModel
     {

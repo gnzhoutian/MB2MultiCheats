@@ -13,7 +13,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.Localization;
 using static HarmonyLib.Code;
 
-namespace MultiCheats
+namespace MB2MultiCheats
 {
     internal sealed class MySettings: AttributeGlobalSettings<MySettings>
     {
@@ -21,14 +21,14 @@ namespace MultiCheats
         {
             get
             {
-                return "MultiCheats";
+                return "MB2MultiCheats";
             }
         }
         public override string DisplayName
         {
             get
             {
-                return "MultiCheats";
+                return "MB2MultiCheats";
             }
         }
 
@@ -36,7 +36,7 @@ namespace MultiCheats
         {
             get
             {
-                return "MultiCheats";
+                return "MB2MultiCheats";
             }
         }
 

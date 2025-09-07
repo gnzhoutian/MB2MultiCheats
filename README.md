@@ -47,10 +47,11 @@
 ## 附录一、简易开发说明
 
 - 安装`VS2022`、目标框架：`.NET Framework 4.7.2`
-- 导入项目后配置引用三个路径后即可编译(调试 -> MultiCheats属性)
+- 导入项目后配置引用下面的路径后即可编译(调试 -> MB2MultiCheats属性)
     - `<MB2_INSTALL_DIR>\bin\Win64_Shipping_Client\`
     - `<MB2_INSTALL_DIR>\Modules\Bannerlord.Harmony\bin\Win64_Shipping_Client\`
     - `<MB2_INSTALL_DIR>\Modules\Bannerlord.MBOptionScreen\bin\Win64_Shipping_Client\`
+	- `<MB2_INSTALL_DIR>\Modules\Bannerlord.UIExtenderEx\bin\Win64_Shipping_Client\`
 
 ## 附录二、属性专精参考表
 
@@ -81,4 +82,4 @@
 - [重要参考 已开源 Kaoses tweaks @Kaoses](https://www.nexusmods.com/mountandblade2bannerlord/mods/2911)
 
 [1]: https://github.com/gnzhoutian/MB2MultiCheats.git  "MB2MultiCheats"
-[2]: https://www.nexusmods.com/mountandblade2bannerlord/mods/7470  "MultiCheats"
+[2]: https://www.nexusmods.com/mountandblade2bannerlord/mods/7470  "MB2MultiCheats"
