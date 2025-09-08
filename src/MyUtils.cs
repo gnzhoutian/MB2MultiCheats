@@ -18,13 +18,13 @@ namespace MB2MultiCheats
         // 返回区间随机正整数
         public static int RandNum(int min, int range = 0)
         {
-            return MCRand.rand.Next(min, min + range + 1);
+            return rand.Next(min, min + range + 1);
         }
 
         // 返回百分比概率结论
         public static bool RandBool(int rate)
         {
-            return (MCRand.rand.Next(0, 100) < rate);
+            return (rand.Next(0, 100) < rate);
         }
     }
 
@@ -33,23 +33,23 @@ namespace MB2MultiCheats
     {
         public static void Debug(string text, bool isTextObject = true)
         {
-            MCLog.Print(text, Colors.Gray, isTextObject);
+            Print(text, Colors.Gray, isTextObject);
         }
 
         public static void Info(string text, bool isTextObject = true)
         {
-            MCLog.Print(text, Colors.Green, isTextObject);
+            Print(text, Colors.Green, isTextObject);
         }
 
         public static void Warn(string text, bool isTextObject = true)
         {
-            MCLog.Print(text, Colors.Yellow, isTextObject);
+            Print(text, Colors.Yellow, isTextObject);
         }
 
         public static void Error(Exception ex)
         {
             Console.WriteLine(ex.ToString());
-            MCLog.Print("ERROR: " + ex.Message + Environment.NewLine + ex.StackTrace, Colors.Red, false);
+            Print("ERROR: " + ex.Message + Environment.NewLine + ex.StackTrace, Colors.Red, false);
         }
 
         private static void Print(string text, Color color, bool isTextObject)

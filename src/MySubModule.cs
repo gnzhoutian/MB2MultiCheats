@@ -9,17 +9,24 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem;
+using Bannerlord.UIExtenderEx;
 
 namespace MB2MultiCheats
 {
     class MySubModule : MBSubModuleBase
     {
+        public static readonly string ModuleName = typeof(SubModule).Namespace;
+
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
             try
             {
-                new Harmony("MB2MultiCheats").PatchAll();
+                new Harmony(ModuleName).PatchAll();
+
+                UIExtender extender = UIExtender.Create(ModuleName);
+                extender.Register(typeof(SubModule).Assembly);
+                extender.Enable();
             }
             catch (Exception ex)
             {
@@ -35,10 +42,11 @@ namespace MB2MultiCheats
                 gameStarterObject.AddModel(new MySmithingModel());
                 gameStarterObject.AddModel(new MyCharacterDevelopmentModel());
                 gameStarterObject.AddModel(new MyBattleRewardModel());
-
+                
                 if (gameStarterObject is CampaignGameStarter starter)
                 {
                     starter.AddBehavior(new MyBehaviors());
+                    starter.AddBehavior(new MyTalkBehavior());
                 }
             }
             catch (Exception ex)
