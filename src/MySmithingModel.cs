@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using HarmonyLib;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameComponents;
-using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using MCM.Abstractions.Base.Global;
 
 namespace MB2MultiCheats

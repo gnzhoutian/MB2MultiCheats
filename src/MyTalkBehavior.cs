@@ -1,31 +1,113 @@
-﻿using Bannerlord.UIExtenderEx.Attributes;
-using Bannerlord.UIExtenderEx.ViewModels;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Pages;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using Bannerlord.UIExtenderEx.Prefabs2;
-using HarmonyLib;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
-using TaleWorlds.CampaignSystem.GameMenus;
-using Helpers;
+using TaleWorlds.CampaignSystem.Roster;
+using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Pages;
+
+using HarmonyLib;
+using Bannerlord.UIExtenderEx.Attributes;
+using Bannerlord.UIExtenderEx.ViewModels;
+using Bannerlord.UIExtenderEx.Prefabs2;
+
 
 namespace MB2MultiCheats
 {
-    public static class MyTalkExtensions
+    // 解决信使会面崩溃问题 -> 尚不清楚原因
+    [HarmonyPatch(typeof(FlattenedTroopRoster), "GenerateUniqueNoFromParty")]
+    public class FlattenedTroopRosterPatch
     {
-        // 哪些角色可以聊天
+        public static bool Prefix(MobileParty party, int troopIndex, ref int __result)
+        {
+            __result = ((party?.Party?.Index).GetValueOrDefault(1) * 999983 + troopIndex * 100003) % 616841;
+            return false;
+        }
+    }
+    
+    // 百科英雄页面添加按钮组件
+    [PrefabExtension("EncyclopediaHeroPage", "descendant::RichTextWidget[@Text='@InformationText']")]
+    internal class EncyclopediaHeroPagePrefabExtension : PrefabExtensionInsertPatch
+    {
+        public override InsertType Type => InsertType.Append;
+
+        [PrefabExtensionText]
+        public string GetContent => @"
+            <Widget WidthSizePolicy=""CoverChildren"" HeightSizePolicy=""CoverChildren"" VerticalAlignment=""Top"" MarginTop=""20"" HorizontalAlignment=""Center"">
+                <Children>
+                    <ButtonWidget Command.Click=""MCSendMessenger"" IsVisible=""@MCCanSendTo"" IsEnabled=""@MCCanSendNow"" SuggestedWidth=""400"" SuggestedHeight=""40"" WidthSizePolicy=""Fixed"" HeightSizePolicy=""Fixed"" Brush=""ButtonBrush2"" DoNotPassEventsToChildren=""true"" UpdateChildrenStates=""true"">
+                        <Children>
+                            <TextWidget Text=""@MCSendMessengerText"" WidthSizePolicy=""StretchToParent"" HeightSizePolicy=""StretchToParent"" Brush=""Kingdom.GeneralButtons.Text""/>
+                        </Children>
+                    </ButtonWidget>
+                </Children>
+            </Widget>
+        ";
+    }
+
+    [ViewModelMixin(nameof(EncyclopediaHeroPageVM.Refresh))]
+    public class EncyclopediaHeroPageVMMixin : BaseViewModelMixin<EncyclopediaHeroPageVM>
+    {
+        private readonly Hero hero;
+        private readonly int cost;
+
+        public EncyclopediaHeroPageVMMixin(EncyclopediaHeroPageVM vm) : base(vm)
+        {
+            hero = vm.Obj as Hero;
+            if (hero == null) return;
+            cost = hero.HasMet ? 500 : 2000;
+
+            MBTextManager.SetTextVariable("MC_Send_Messenger_Cost", cost.ToString());
+            MCSendMessengerText = new TextObject("{=mcSendMessengerText}Send Messenger({MC_Send_Messenger_Cost} denars)").ToString();
+        }
+
+        [DataSourceProperty]
+        public string MCSendMessengerText { get; }
+
+        [DataSourceMethod]
+        public void MCSendMessenger()
+        {
+            Hero.MainHero.GiveGoldToSettment(cost);
+            MyTalkBehavior.SendMessenger(hero);
+            OnPropertyChanged("MCCanSendNow");
+
+            MBTextManager.SetTextVariable("MC_Send_Messenger_Hero", hero.Name.ToString());
+            MCLog.Info("{=mcSendMessengerClick}The messenger has departed. You will soon meet {MC_Send_Messenger_Hero}...");
+        }
+
+        [DataSourceProperty]
+        public bool MCCanSendTo
+        {
+            get
+            {
+                return hero != null && hero != Hero.MainHero && hero.IsAlive;
+            }
+        }
+
+        [DataSourceProperty]
+        public bool MCCanSendNow
+        {
+            get
+            {
+                return hero != null && hero != Hero.MainHero && hero.IsActive && !MyTalkBehavior.MessengerSended(hero);
+            }
+        }
+    }
+
+    internal static class MyTalkExtensions
+    {
+        // 是否可以开始聊天
         public static bool CanTalkTo(this Hero hero)
         {
-            // CharacterStates && hero.IsAlive && !hero.IsPrisoner && !mainHero.IsPrisoner
             return hero != Hero.MainHero && hero.IsActive && Hero.MainHero.IsActive
                 && Hero.MainHero.PartyBelongedTo != null
                 && Hero.MainHero.PartyBelongedTo.MapEvent == null
@@ -75,6 +157,33 @@ namespace MB2MultiCheats
         }
     }
 
+    internal class Messenger
+    {
+        public Hero Hero { get; protected set; }
+
+        public bool Ready { get; protected set; }
+
+        public int Hours { get; protected set; }
+
+        private const float SpeedPerHour = 30f;
+
+        public Messenger(Hero hero)
+        {
+            Hero = hero;
+            Ready = false;
+            Hours = 0;
+        }
+
+        public void HourlyTick()
+        {
+            Hours += 1;
+            if (!Ready && Hero.MainHero.GetHeroDistance(Hero) <= SpeedPerHour * (float)Hours)
+            {
+                Ready = true;
+            }
+        }
+    }
+
     internal class MyTalkBehavior : CampaignBehaviorBase
     {
         public override void RegisterEvents()
@@ -85,48 +194,17 @@ namespace MB2MultiCheats
             CampaignEvents.ConversationEnded.AddNonSerializedListener(this, OnConversationEnded);
         }
 
-        public override void SyncData(IDataStore dataStore)
-        {
-        }
+        public override void SyncData(IDataStore dataStore) { }
 
         private static LinkedList<Messenger> Messengers = new LinkedList<Messenger>();
 
         private static PlayerEncounter meeting = null;
-
-        private static Hero meetingHero = null;
 
         private static PlayerEncounter keepEncounter = null;
 
         private static LocationEncounter keepLocation = null;
 
         private static Settlement keepSettlement = null;
-
-        private class Messenger
-        {
-            public Hero Hero { get; protected set; }
-
-            public bool Ready { get; protected set; }
-
-            public int Hours { get; protected set; }
-
-            private const float SpeedPerHour = 30f;
-
-            public Messenger(Hero hero)
-            {
-                Hero = hero;
-                Ready = false;
-                Hours = 0;
-            }
-
-            public void HourlyTick()
-            {
-                Hours += 1;
-                if (!Ready && Hero.MainHero.GetHeroDistance(Hero) <= SpeedPerHour * (float)Hours)
-                {
-                    Ready = true;
-                }
-            }
-        }
 
         private void OnGameLoaded(CampaignGameStarter game)
         {
@@ -171,7 +249,6 @@ namespace MB2MultiCheats
                 Hero.MainHero.PartyBelongedTo.CurrentSettlement = keepSettlement;
 
                 meeting = null;
-                meetingHero = null;
                 keepEncounter = null;
                 keepLocation = null;
                 keepSettlement = null;
@@ -218,13 +295,7 @@ namespace MB2MultiCheats
                 {
                     if ((targetParty = target.LastKnownClosestSettlement?.Party) == null)
                     {
-                        if ((targetParty = player.HomeSettlement?.Party) == null)
-                        {
-                            foreach (Settlement settlement in Settlement.All)
-                            {
-                                if ((targetParty = settlement.Party) != null) break;
-                            }
-                        }
+                        if ((targetParty = player.HomeSettlement?.Party) == null) { }
                     }
                 }
             }
@@ -246,7 +317,6 @@ namespace MB2MultiCheats
                 PlayerEncounter.Start();
                 PlayerEncounter.Current.SetupFields(playerParty, targetParty ?? playerParty);
                 meeting = PlayerEncounter.Current;
-                meetingHero = target;
 
                 Campaign.Current.TimeControlMode = CampaignTimeControlMode.Stop;
                 Campaign.Current.CurrentConversationContext = ConversationContext.Default;
@@ -254,80 +324,7 @@ namespace MB2MultiCheats
                 AccessTools.Field(typeof(PlayerEncounter), "_stateHandled").SetValue(PlayerEncounter.Current, true);
                 AccessTools.Field(typeof(PlayerEncounter), "_meetingDone").SetValue(PlayerEncounter.Current, true);
             }
-
-            MCLog.Info("信使会面: " + messenger.Hero.ToString() + " -> " + messenger.Hours.ToString() + "小时");
             CampaignMission.OpenConversationMission(new ConversationCharacterData(player.CharacterObject, playerParty), new ConversationCharacterData(target.CharacterObject, targetParty), "", "");
         }
     }
-
-    // [PrefabExtension("EncyclopediaHeroPage", "descendant::TextWidget[@Text='@SkillsText']")]
-    [PrefabExtension("EncyclopediaHeroPage", "descendant::RichTextWidget[@Text='@InformationText']")]
-    internal class EncyclopediaHeroPagePrefabExtension : PrefabExtensionInsertPatch
-    {
-        public override InsertType Type => InsertType.Append;
-
-        [PrefabExtensionText]
-        public string GetContent => @"
-            <Widget WidthSizePolicy=""CoverChildren"" HeightSizePolicy=""CoverChildren"" VerticalAlignment=""Top"" MarginTop=""20"" HorizontalAlignment=""Center"">
-                <Children>
-                    <ButtonWidget Command.Click=""CallToTalk"" IsVisible=""@CanTalkTo"" IsEnabled=""@WillNotTalk"" SuggestedWidth=""400"" SuggestedHeight=""40"" WidthSizePolicy=""Fixed"" HeightSizePolicy=""Fixed"" Brush=""ButtonBrush2"" DoNotPassEventsToChildren=""true"" UpdateChildrenStates=""true"">
-                        <Children>
-                            <TextWidget Text=""@CallToTalkText"" WidthSizePolicy=""StretchToParent"" HeightSizePolicy=""StretchToParent"" Brush=""Kingdom.GeneralButtons.Text""/>
-                        </Children>
-                    </ButtonWidget>
-                </Children>
-            </Widget>
-        ";
-    }
-
-    [ViewModelMixin(nameof(EncyclopediaHeroPageVM.Refresh))]
-    public class EncyclopediaHeroPageVMMixin : BaseViewModelMixin<EncyclopediaHeroPageVM>
-    {
-        private readonly Hero hero;
-
-        public EncyclopediaHeroPageVMMixin(EncyclopediaHeroPageVM vm) : base(vm)
-        {
-            hero = vm.Obj as Hero;
-            if (hero != null)
-            {
-                MCLog.Info(hero.Name.ToString());
-            }
-            // MCLog.Warn(vm.Master.Hero.Name + " -> " + hero.Name);
-            // You will pay {AMOUNT}{GOLD_ICON} denars.
-            
-            CallToTalkText = new TextObject(hero.HasMet ? "发送信使(500第纳尔)" : "发送信使(2000第纳尔)", null).ToString();
-            // CallToTalkText = new TextObject("发送信使(2000第纳尔)", null).ToString();
-            // CallToTalkText = new TextObject("Send Messenger(500 denars)", null).ToString();
-            // CallToTalkText = new TextObject("Send Messenger(2000 denars)", null).ToString();
-        }
-
-        [DataSourceMethod]
-        public void CallToTalk()
-        {
-        }
-
-        [DataSourceProperty]
-        public string CallToTalkText { get; }
-
-        [DataSourceProperty]
-        public bool CanTalkTo
-        {
-            get
-            {
-                return true;
-                // return hero != null && hero.CanTalkTo();
-            }
-        }
-
-        [DataSourceProperty]
-        public bool WillNotTalk
-        {
-            get
-            {
-                return true;
-                // return !MyTalkBehavior.MessengerSended(hero);
-            }
-        }
-    }
 }
-

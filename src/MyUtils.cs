@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using MCM.Abstractions.Base.Global;
-using System.Runtime.CompilerServices;
 
 namespace MB2MultiCheats
 {

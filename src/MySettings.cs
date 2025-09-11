@@ -9,9 +9,6 @@ using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v1;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.Global;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Issues;
-using TaleWorlds.Localization;
 
 
 namespace MB2MultiCheats

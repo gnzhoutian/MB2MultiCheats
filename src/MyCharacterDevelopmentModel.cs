@@ -10,7 +10,6 @@ using TaleWorlds.Library;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameComponents;
 using MCM.Abstractions.Base.Global;
-using TaleWorlds.Localization;
 
 
 namespace MB2MultiCheats
