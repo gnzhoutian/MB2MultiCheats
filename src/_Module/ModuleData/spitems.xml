@@ -1,65 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Items>
-    <Item id="mc_item_dragon_bracer"
-          name="{=mcItemDragonBracer}Dragon Bracer"
-          mesh="khuzait_heavy_armor_bracer"
-          culture="Culture.neutral_culture"
-          is_merchandise="false"
-          multiplayer_item="false"
-		  value="48000"
-          weight="1.2"
-          appearance="7"
-          Type="HandArmor">
+    <Item
+        id="mc_item_dragon_bracer"
+        name="{=mcItemDragonBracer}Dragon Bracer"
+        mesh="khuzait_heavy_armor_bracer"
+        culture="Culture.neutral_culture"
+        is_merchandise="false"
+        multiplayer_item="false"
+        value="48000"
+        weight="1.2"
+        appearance="7"
+        Type="HandArmor">
         <ItemComponent>
-            <Armor head_armor="120"
-                   body_armor="120"
-                   leg_armor="120"
-                   arm_armor="120"
-                   covers_hands="false"
-                   modifier_group="plate"
-                   material_type="Plate" />
+            <Armor
+                head_armor="120"
+                body_armor="120"
+                leg_armor="120"
+                arm_armor="120"
+                covers_hands="false"
+                modifier_group="plate"
+                material_type="Plate" />
         </ItemComponent>
         <Flags Civilian="true" />
     </Item>
-	<Item id = "mc_item_featherless_arrows"
-			name="{=mcItemFeatherlessArrows}Featherless Arrows"
-			mesh="throwing_stone"
-			body_name="bo_throwing_stone"
-			holster_body_name="bo_axe_short"
-			holster_mesh="stone_holster"
-			holster_mesh_with_weapon="stone_holster"
-			is_merchandise="false"
-			value="48000"
-			appearance="0.1"
-			weight="0.01"
-			Type="Thrown"
-			item_holsters="throwing_stone:throwing_stone_2">
-		<ItemComponent>
-			<Weapon
-				weapon_class = "Stone"
-				ammo_class="Stone"
-				stack_amount="240"
-				physics_material="missile"
-				accuracy="120"
-				thrust_speed="120"
-				speed_rating="120"
-				missile_speed="120"
-				weapon_length="10"
-				thrust_damage="120"
-				thrust_damage_type="Blunt"
-				item_usage="stone"
-				rotation="100,30,20"
-				passby_sound_code="event:/mission/combat/missile/passby"
-				rotation_speed="0, -3.0, 0">
-				<WeaponFlags
-					RangedWeapon = "true"
-					Consumable="true"
-					AutoReload="true"
-					MultiplePenetration="true"
-					CanPenetrateShield="true"
-					UseHandAsThrowBase="true" />
-			</Weapon>
-		</ItemComponent>
-		<Flags Civilian="true" />
-	</Item>
+    <Item
+        id="mc_item_featherless_arrows"
+        name="{=mcItemFeatherlessArrows}Featherless Arrows"
+        mesh="throwing_stone"
+        body_name="bo_throwing_stone"
+        holster_body_name="bo_axe_short"
+        holster_mesh="stone_holster"
+        holster_mesh_with_weapon="stone_holster"
+        is_merchandise="false"
+        value="48000"
+        appearance="0.1"
+        weight="0.01"
+        Type="Thrown"
+        item_holsters="throwing_stone:throwing_stone_2">
+        <ItemComponent>
+            <Weapon
+                weapon_class="Stone"
+                ammo_class="Stone"
+                stack_amount="240"
+                physics_material="missile"
+                accuracy="120"
+                thrust_speed="120"
+                speed_rating="120"
+                missile_speed="120"
+                weapon_length="10"
+                thrust_damage="120"
+                thrust_damage_type="Blunt"
+                item_usage="stone"
+                rotation="100,30,20"
+                passby_sound_code="event:/mission/combat/missile/passby"
+                rotation_speed="0, -3.0, 0">
+                <WeaponFlags
+                    RangedWeapon="true"
+                    Consumable="true"
+                    AutoReload="true"
+                    MultiplePenetration="true"
+                    CanPenetrateShield="true"
+                    UseHandAsThrowBase="true" />
+            </Weapon>
+        </ItemComponent>
+        <Flags Civilian="true" />
+    </Item>
 </Items>

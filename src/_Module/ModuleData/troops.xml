@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <NPCCharacters>
-    <NPCCharacter id="mc_troop_dragon_guard"
+    <NPCCharacter
+        id="mc_troop_dragon_guard"
         default_group="HorseArcher"
         level="48"
         name="{=mcTroopDragonGuard}Dragon Guard"
@@ -22,7 +23,7 @@
         <Equipments>
             <EquipmentRoster>
                 <equipment slot="Item0" id="Item.empire_polearm_1_t4"/>
-				<equipment slot="Item1" id="Item.mc_item_featherless_arrows"/>
+                <equipment slot="Item1" id="Item.mc_item_featherless_arrows"/>
                 <equipment slot="Head" id="Item.imperial_goggled_helmet"/>
                 <equipment slot="Cape" id="Item.desert_scale_shoulders"/>
                 <equipment slot="Body" id="Item.imperial_scale_armor"/>
@@ -35,4 +36,3 @@
         </Equipments>
     </NPCCharacter>
 </NPCCharacters>
-
