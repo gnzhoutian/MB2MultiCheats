@@ -38,7 +38,7 @@ namespace MB2MultiCheats
 
                 int num = Math.Min(MCRand.RandNum(min, range),MobileParty.MainParty.LimitedPartySize - MobileParty.MainParty.Party.NumberOfAllMembers);
 
-                List<string> reward_items = new List<string>() { "mc_item_dragon_bracer", "mc_item_shadow_horse", "mc_item_dragon_scale_horse_barding", "mc_item_sunset_bow" , "mc_item_eagle_feather_arrows"};
+                List<string> reward_items = new List<string>() { "mc_item_dragon_bracer", "mc_item_featherless_arrows"};
 
                 if (num > 0)
                 {
