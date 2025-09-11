@@ -18,7 +18,7 @@ using TaleWorlds.ObjectSystem;
 
 namespace MB2MultiCheats
 {
-    class MyBattleRewardModel: DefaultBattleRewardModel
+    internal class MyBattleRewardModel: DefaultBattleRewardModel
     {
         // 战利品存在优质前缀, 则均分优质前缀概率
         public override EquipmentElement GetLootedItemFromTroop(CharacterObject character, float targetValue)

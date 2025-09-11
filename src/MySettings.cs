@@ -12,8 +12,7 @@ using MCM.Abstractions.Base.Global;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Issues;
 using TaleWorlds.Localization;
-using static HarmonyLib.Code;
-using static TaleWorlds.CampaignSystem.CharacterDevelopment.DefaultPerks;
+
 
 namespace MB2MultiCheats
 {
@@ -23,7 +22,7 @@ namespace MB2MultiCheats
         {
             get
             {
-                return "MB2MultiCheats";
+                return MySubModule.ModuleName;
             }
         }
 
@@ -31,7 +30,7 @@ namespace MB2MultiCheats
         {
             get
             {
-                return "MB2MultiCheats";
+                return MySubModule.ModuleName;
             }
         }
 
@@ -39,7 +38,7 @@ namespace MB2MultiCheats
         {
             get
             {
-                return "MB2MultiCheats";
+                return MySubModule.ModuleName;
             }
         }
 

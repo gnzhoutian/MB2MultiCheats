@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 namespace MB2MultiCheats
 {
     // 随机工具
-    public static class MCRand
+    internal static class MCRand
     {
         private static readonly Random rand = new Random();
 
@@ -29,7 +29,7 @@ namespace MB2MultiCheats
     }
 
     // 日志工具
-    public static class MCLog
+    internal static class MCLog
     {
         public static void Debug(string text, bool isTextObject = true)
         {
@@ -48,23 +48,12 @@ namespace MB2MultiCheats
 
         public static void Error(Exception ex)
         {
-            Console.WriteLine(ex.ToString());
             Print("ERROR: " + ex.Message + Environment.NewLine + ex.StackTrace, Colors.Red, false);
         }
 
         private static void Print(string text, Color color, bool isTextObject)
         {
-            if (isTextObject)
-            {
-                InformationManager.DisplayMessage(new InformationMessage(new TextObject(text).ToString(), color));
-            }
-            else
-            {
-                InformationManager.DisplayMessage(new InformationMessage(text, color));
-            }
+            InformationManager.DisplayMessage(new InformationMessage(isTextObject ? new TextObject(text).ToString() : text, color));
         }
     }
 }
-
-
-

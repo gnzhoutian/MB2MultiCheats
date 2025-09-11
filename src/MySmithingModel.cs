@@ -14,7 +14,7 @@ using MCM.Abstractions.Base.Global;
 
 namespace MB2MultiCheats
 {
-    class MySmithingModel : DefaultSmithingModel
+    internal class MySmithingModel : DefaultSmithingModel
     {
         // 精炼体力消耗
         public override int GetEnergyCostForRefining(ref Crafting.RefiningFormula refineFormula, Hero hero)

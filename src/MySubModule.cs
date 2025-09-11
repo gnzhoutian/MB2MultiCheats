@@ -13,20 +13,21 @@ using Bannerlord.UIExtenderEx;
 
 namespace MB2MultiCheats
 {
-    class MySubModule : MBSubModuleBase
+    internal class MySubModule : MBSubModuleBase
     {
-        public static readonly string ModuleName = typeof(SubModule).Namespace;
+        public static readonly string ModuleName = typeof(MySubModule).Namespace;
 
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
             try
             {
-                new Harmony(ModuleName).PatchAll();
-
+                // 初始化顺序: UIExtender -> Harmony
                 UIExtender extender = UIExtender.Create(ModuleName);
-                extender.Register(typeof(SubModule).Assembly);
+                extender.Register(typeof(MySubModule).Assembly);
                 extender.Enable();
+
+                new Harmony(ModuleName).PatchAll();
             }
             catch (Exception ex)
             {

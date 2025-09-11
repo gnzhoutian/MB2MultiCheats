@@ -15,7 +15,7 @@ using TaleWorlds.Localization;
 
 namespace MB2MultiCheats
 {
-    class MyCharacterDevelopmentModel : DefaultCharacterDevelopmentModel
+    internal class MyCharacterDevelopmentModel : DefaultCharacterDevelopmentModel
     {
         // 六维最大属性点 10 -> 30
         public override int MaxAttribute

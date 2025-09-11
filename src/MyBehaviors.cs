@@ -18,7 +18,7 @@ using TaleWorlds.Localization;
 
 namespace MB2MultiCheats
 {
-    public class MyBehaviors : CampaignBehaviorBase
+    internal class MyBehaviors : CampaignBehaviorBase
     {
         public override void RegisterEvents()
         {
