@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<NPCCharacters>
+    <NPCCharacter
+        id="mc_troop_dragon_guard"
+        default_group="HorseArcher"
+        level="48"
+        name="{=mcTroopDragonGuard}Dragon Guard"
+        occupation="Soldier"
+        culture="Culture.neutral_culture">
+        <face>
+            <face_key_template value="BodyProperty.fighter_empire"/>
+        </face>
+        <skills >
+            <skill id="Athletics" value="720"/>
+            <skill id="Riding" value="720"/>
+            <skill id="OneHanded" value="0"/>
+            <skill id="TwoHanded" value="0"/>
+            <skill id="Polearm" value="720"/>
+            <skill id="Bow" value="0"/>
+            <skill id="Crossbow" value="0"/>
+            <skill id="Throwing" value="720"/>
+        </skills>
+        <Equipments>
+            <EquipmentRoster>
+                <equipment slot="Item0" id="Item.empire_polearm_1_t4"/>
+                <equipment slot="Item1" id="Item.mc_item_featherless_arrows"/>
+                <equipment slot="Head" id="Item.imperial_goggled_helmet"/>
+                <equipment slot="Cape" id="Item.desert_scale_shoulders"/>
+                <equipment slot="Body" id="Item.imperial_scale_armor"/>
+                <equipment slot="Gloves" id="Item.mc_item_dragon_bracer"/>
+                <equipment slot="Leg" id="Item.decorated_imperial_boots"/>
+                <equipment slot="Horse" id="Item.noble_horse_southern"/>
+                <equipment slot="HorseHarness" id="Item.imperial_scale_barding"/>
+            </EquipmentRoster>
+        </Equipments>
+    </NPCCharacter>
+</NPCCharacters>

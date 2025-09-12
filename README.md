@@ -51,7 +51,7 @@
     - `<MB2_INSTALL_DIR>\bin\Win64_Shipping_Client\`
     - `<MB2_INSTALL_DIR>\Modules\Bannerlord.Harmony\bin\Win64_Shipping_Client\`
     - `<MB2_INSTALL_DIR>\Modules\Bannerlord.MBOptionScreen\bin\Win64_Shipping_Client\`
-	- `<MB2_INSTALL_DIR>\Modules\Bannerlord.UIExtenderEx\bin\Win64_Shipping_Client\`
+    - `<MB2_INSTALL_DIR>\Modules\Bannerlord.UIExtenderEx\bin\Win64_Shipping_Client\`
 
 ## 附录二、属性专精参考表
 

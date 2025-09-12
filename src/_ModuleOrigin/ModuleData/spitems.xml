@@ -7,7 +7,7 @@
         culture="Culture.neutral_culture"
         is_merchandise="false"
         multiplayer_item="false"
-        value="48000"
+        value="480000"
         weight="1.2"
         appearance="7"
         Type="HandArmor">
@@ -21,18 +21,19 @@
                 modifier_group="plate"
                 material_type="Plate" />
         </ItemComponent>
-        <Flags Civilian="true" />
+        <Flags UseTeamColor="false"  Civilian="true" />
     </Item>
     <Item
         id="mc_item_featherless_arrows"
         name="{=mcItemFeatherlessArrows}Featherless Arrows"
         mesh="throwing_stone"
+        culture="Culture.neutral_culture"
         body_name="bo_throwing_stone"
         holster_body_name="bo_axe_short"
         holster_mesh="stone_holster"
         holster_mesh_with_weapon="stone_holster"
         is_merchandise="false"
-        value="48000"
+        value="480000"
         appearance="0.1"
         weight="0.01"
         Type="Thrown"
@@ -58,6 +59,7 @@
                     RangedWeapon="true"
                     Consumable="true"
                     AutoReload="true"
+                    CanKnockDown="true"
                     MultiplePenetration="true"
                     CanPenetrateShield="true"
                     UseHandAsThrowBase="true" />
