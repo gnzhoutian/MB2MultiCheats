@@ -23,17 +23,6 @@ using Bannerlord.UIExtenderEx.Prefabs2;
 
 namespace MB2MultiCheats
 {
-    // 解决信使会面崩溃问题 -> 尚不清楚原因
-    [HarmonyPatch(typeof(FlattenedTroopRoster), "GenerateUniqueNoFromParty")]
-    public class FlattenedTroopRosterPatch
-    {
-        public static bool Prefix(MobileParty party, int troopIndex, ref int __result)
-        {
-            __result = ((party?.Party?.Index).GetValueOrDefault(1) * 999983 + troopIndex * 100003) % 616841;
-            return false;
-        }
-    }
-    
     // 百科英雄页面添加按钮组件
     [PrefabExtension("EncyclopediaHeroPage", "descendant::RichTextWidget[@Text='@InformationText']")]
     internal class EncyclopediaHeroPagePrefabExtension : PrefabExtensionInsertPatch
@@ -279,7 +268,7 @@ namespace MB2MultiCheats
             }
         }
 
-        // 开始会面
+        // 开始会面 -> 应该还可以精简
         private void StartMeeting(Messenger messenger)
         {
             Hero player = Hero.MainHero;
@@ -325,6 +314,17 @@ namespace MB2MultiCheats
                 AccessTools.Field(typeof(PlayerEncounter), "_meetingDone").SetValue(PlayerEncounter.Current, true);
             }
             CampaignMission.OpenConversationMission(new ConversationCharacterData(player.CharacterObject, playerParty), new ConversationCharacterData(target.CharacterObject, targetParty), "", "");
+        }
+    }
+
+    // 解决信使会面崩溃问题 -> 尚不清楚原因
+    [HarmonyPatch(typeof(FlattenedTroopRoster), "GenerateUniqueNoFromParty")]
+    public class FlattenedTroopRosterPatch
+    {
+        public static bool Prefix(MobileParty party, int troopIndex, ref int __result)
+        {
+            __result = ((party?.Party?.Index).GetValueOrDefault(1) * 999983 + troopIndex * 100003) % 616841;
+            return false;
         }
     }
 }

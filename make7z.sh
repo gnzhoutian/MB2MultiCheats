@@ -1,11 +1,12 @@
 #!/bin/bash
-# usage: ./make7z.sh all/Origin/SanGuo 1.3.0
+# usage: ./make7z.sh all/Origin/SanGuo 1.3.0 [up]
 set -x -e
 TOP_PATH=$(cd `dirname $0`; pwd); cd $TOP_PATH
 rm -rf tmpbuild; mkdir -p tmpbuild
 
 MOD_TYPE=$1  # all/Origin/SanGuo
 MOD_VERSION=$2  # 1.3.0
+MOD_UPDATE=$3
 
 make_mod(){
     mod_name=$1
@@ -15,6 +16,11 @@ make_mod(){
     cp -af src/_Module${mod_flag} tmpbuild/${mod_name}
 
     pushd tmpbuild/${mod_name}
+        if [ "$MOD_UPDATE"x != ""x ];then
+            cp -af ${TOP_PATH}/src/obj/Debug/*.dll ${TOP_PATH}/src/_Module/bin/Win64_Shipping_Client/
+            cp -af ${TOP_PATH}/src/obj/Debug/*.pdb ${TOP_PATH}/src/_Module/bin/Win64_Shipping_Client/
+        fi
+
         cp -af ${TOP_PATH}/src/_Module/* ./
         cp -af ${TOP_PATH}/pics ./
         cp -af ${TOP_PATH}/LICENSE ./
@@ -45,9 +51,9 @@ if [ "$2"x != ""x ];then
         make_mod MB2MultiCheatsSanGuo SanGuo
         ;;
     *)
-        echo "入参错误，示例: ./make7z.sh all 1.3.0"
+        echo "入参错误，示例: ./make7z.sh all 1.3.0 [up]"
         ;;
     esac
 else
-    echo "入参错误，示例: ./make7z.sh all 1.3.0"
+    echo "入参错误，示例: ./make7z.sh all 1.3.0 [up]"
 fi
