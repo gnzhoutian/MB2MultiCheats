@@ -23,7 +23,9 @@
         <Equipments>
             <EquipmentRoster>
                 <equipment slot="Item0" id="Item.empire_polearm_1_t4"/>
-                <equipment slot="Item1" id="Item.mc_item_featherless_arrows"/>
+                <equipment slot="Item1" id="Item.noble_bow"/>
+                <equipment slot="Item2" id="Item.bodkin_arrows_a"/>
+                <equipment slot="Item3" id="Item.mc_item_featherless_arrows"/>
                 <equipment slot="Head" id="Item.imperial_goggled_helmet"/>
                 <equipment slot="Cape" id="Item.desert_scale_shoulders"/>
                 <equipment slot="Body" id="Item.imperial_scale_armor"/>

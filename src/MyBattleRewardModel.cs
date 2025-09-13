@@ -39,13 +39,12 @@ namespace MB2MultiCheats
             return randomItem;
         }
 
-        // 战利品最大价值增益，关联流氓习气等级
+        // 战利品最大价值增益
         public override float GetExpectedLootedItemValue(CharacterObject character)
         {
-
             if (MCRand.RandBool(GlobalSettings<MySettings>.Instance.GainLootedItemRate))
             {
-                return (float)(character.Level * character.Level * MobileParty.MainParty.LeaderHero.GetSkillValue(DefaultSkills.Roguery));
+                return base.GetExpectedLootedItemValue(character) * (float)character.Level;
             }
             return base.GetExpectedLootedItemValue(character);
         }

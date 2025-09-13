@@ -23,7 +23,9 @@
         <Equipments>
             <EquipmentRoster>
                 <equipment slot="Item0" id="Item.lz_xuhuang_01"/>
-                <equipment slot="Item1" id="Item.mc_item_featherless_arrows"/>
+                <equipment slot="Item1" id="Item.lz_bow_jiang"/>
+                <equipment slot="Item2" id="Item.lz_arrow_jiang"/>
+                <equipment slot="Item3" id="Item.mc_item_featherless_arrows"/>
                 <equipment slot="Head" id="Item.sg_ar_c01_g002_head_lb"/>
                 <equipment slot="Body" id="Item.sg_ar_c01_g002_body_lb"/>
                 <equipment slot="Gloves" id="Item.mc_item_dragon_bracer"/>

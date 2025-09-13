@@ -223,8 +223,8 @@ namespace MB2MultiCheats
             Messenger messenger = Messengers.FirstOrDefault((Messenger x) => x.Ready);
             if (messenger != null && messenger.Hero.CanTalkTo())
             {
-                Messengers.Remove(messenger);
                 StartMeeting(messenger);
+                Messengers.Remove(messenger);
             }
         }
 

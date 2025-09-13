@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -123,7 +124,8 @@ namespace MB2MultiCheats
 
 
         [SettingPropertyInteger("{=mcConfigBattleText1}Gain Looted Item Rate", 0, 100, Order = 0, RequireRestart = false,
-            HintText = "{=mcConfigBattleDesc1}The probability of high-quality in loot reward, the highest value is related to the level of roguery, and the high-quality prefix is ​​evenly distributed, the default is 0%, and 20% is recommended")]
+            HintText = "{=mcConfigBattleDesc1}Increase the probability of high-quality and high-value in loot reward, and the high-quality prefix is ​evenly distributed, the default is 0%, and 20% is recommended")]
+
         [SettingPropertyGroup("{=mcConfigBattle}Battle", GroupOrder = 5)]
         public int GainLootedItemRate { get; set; } = 0;
 
