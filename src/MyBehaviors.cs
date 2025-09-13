@@ -131,14 +131,20 @@ namespace MB2MultiCheats
             if ((bool)GlobalSettings<MySettings>.Instance.CompanionAppendAttributeAndFocus) {
                 foreach (CharacterObject obj in heros)
                 {
-                    if (obj.IsHero && !obj.IsPlayerCharacter)
+                    if (!obj.IsPlayerCharacter && obj.IsHero && obj.HeroObject.Clan == Clan.PlayerClan && obj.HeroObject.IsActive)
                     {
                         Hero hero = obj.HeroObject;
-                        if (hero.Clan == Clan.PlayerClan && hero.Age > 18.0f && hero.HeroDeveloper.UnspentAttributePoints == 0 && hero.HeroDeveloper.UnspentFocusPoints == 0)
-                        {
-                            int attrPoints = hero.Level * (int)GlobalSettings<MySettings>.Instance.LevelupExtraAttribute;
-                            int focusPoints = hero.Level * (int)GlobalSettings<MySettings>.Instance.LevelupExtraFocus;
+                        int attrPoints = 0;
+                        int focusPoints = 0;
+                        
+                        if (hero.HeroDeveloper.UnspentAttributePoints == 0)
+                            attrPoints = hero.Level * (int)GlobalSettings<MySettings>.Instance.LevelupExtraAttribute;
+                    
+                        if (hero.HeroDeveloper.UnspentFocusPoints == 0)
+                            focusPoints = hero.Level * (int)GlobalSettings<MySettings>.Instance.LevelupExtraFocus;
 
+                        if (attrPoints != 0 || focusPoints != 0)
+                        {
                             hero.HeroDeveloper.UnspentAttributePoints += attrPoints;
                             hero.HeroDeveloper.UnspentFocusPoints += focusPoints;
 

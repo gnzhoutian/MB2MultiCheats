@@ -87,7 +87,9 @@ namespace MB2MultiCheats
         {
             get
             {
-                return hero != null && hero != Hero.MainHero && hero.IsActive && !MyTalkBehavior.MessengerSended(hero);
+                return hero != null && hero != Hero.MainHero && hero.IsActive
+                    && hero != MyTalkBehavior.MeetingHero
+                    && !MyTalkBehavior.MessengerSended(hero);
             }
         }
     }
@@ -187,7 +189,7 @@ namespace MB2MultiCheats
 
         private static LinkedList<Messenger> Messengers = new LinkedList<Messenger>();
 
-        private static PlayerEncounter meeting = null;
+        private static Hero meetingHero = null;
 
         private static PlayerEncounter keepEncounter = null;
 
@@ -223,8 +225,8 @@ namespace MB2MultiCheats
             Messenger messenger = Messengers.FirstOrDefault((Messenger x) => x.Ready);
             if (messenger != null && messenger.Hero.CanTalkTo())
             {
-                StartMeeting(messenger);
                 Messengers.Remove(messenger);
+                StartMeeting(messenger);
             }
         }
 
@@ -237,7 +239,7 @@ namespace MB2MultiCheats
                 AccessTools.Property(typeof(Campaign), "LocationEncounter").SetValue(Campaign.Current, keepLocation);
                 Hero.MainHero.PartyBelongedTo.CurrentSettlement = keepSettlement;
 
-                meeting = null;
+                meetingHero = null;
                 keepEncounter = null;
                 keepLocation = null;
                 keepSettlement = null;
@@ -249,7 +251,15 @@ namespace MB2MultiCheats
         {
             get
             {
-                return meeting != null;
+                return meetingHero != null;
+            }
+        }
+
+        public static Hero MeetingHero
+        {
+            get
+            {
+                return meetingHero;
             }
         }
 
@@ -305,7 +315,7 @@ namespace MB2MultiCheats
                 // 开始遭遇
                 PlayerEncounter.Start();
                 PlayerEncounter.Current.SetupFields(playerParty, targetParty ?? playerParty);
-                meeting = PlayerEncounter.Current;
+                meetingHero = target;
 
                 Campaign.Current.TimeControlMode = CampaignTimeControlMode.Stop;
                 Campaign.Current.CurrentConversationContext = ConversationContext.Default;
