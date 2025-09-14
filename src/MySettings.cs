@@ -97,6 +97,11 @@ namespace MB2MultiCheats
         [SettingPropertyGroup("{=mcConfigSettlement}Settlement", GroupOrder = 4)]
         public int DailySettlementLoyalty { get; set; } = 0;
 
+        [SettingPropertyInteger("{=mcConfigSettlementText2}Construction speed bonus rate", 1, 100, Order = 1, RequireRestart = false,
+            HintText = "{=mcConfigSettlementDesc2}Clan settlements daily construction speed bonus rate, the default is 1x, and 10x is recommended")]
+        [SettingPropertyGroup("{=mcConfigSettlement}Settlement", GroupOrder = 4)]
+        public int DailySettlementBoostBonus { get; set; } = 1;
+
 
         [SettingPropertyInteger("{=mcConfigBattleText1}Gain Looted Item Rate", 0, 100, Order = 0, RequireRestart = false,
             HintText = "{=mcConfigBattleDesc1}Increase the probability of high-quality and high-value in loot reward, and the high-quality prefix is ​evenly distributed, the default is 0%, and 20% is recommended")]
@@ -114,7 +119,5 @@ namespace MB2MultiCheats
             HintText = "{=mcConfigPregnancyDesc2}Disable stillbirth, the default is false, and true is recommended")]
         [SettingPropertyGroup("{=mcConfigPregnancy}Pregnancy", GroupOrder = 6)]
         public bool CloseStillbirth { get; set; } = false;
-
-
     }
 }

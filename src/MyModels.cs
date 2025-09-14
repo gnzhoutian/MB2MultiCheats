@@ -8,6 +8,7 @@ using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.CampaignSystem.Settlements;
 
 namespace MB2MultiCheats
 {
@@ -95,6 +96,19 @@ namespace MB2MultiCheats
         }
     }
 
+    internal class MyBuildingConstructionModel : DefaultBuildingConstructionModel
+    {
+        // 定居点建设速度增益
+        public override int GetBoostAmount(Town town)
+        {
+            if (town?.OwnerClan?.Leader != null && town.OwnerClan.Leader.IsHumanPlayerCharacter)
+            {
+                return base.GetBoostAmount(town) + (town.IsCastle ? CastleBoostBonus : TownBoostBonus) * (GlobalSettings<MySettings>.Instance.DailySettlementBoostBonus - 1);
+            }
+            return base.GetBoostAmount(town);
+        }
+    }
+
     internal class MyBattleRewardModel : DefaultBattleRewardModel
     {
         // 战利品存在优质前缀, 则均分优质前缀概率
@@ -124,4 +138,7 @@ namespace MB2MultiCheats
                 return base.GetExpectedLootedItemValue(character);
         }
     }
+
+
+
 }

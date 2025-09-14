@@ -44,6 +44,7 @@ namespace MB2MultiCheats
                 gameStarterObject.AddModel(new MySmithingModel());
                 gameStarterObject.AddModel(new MyPregnancyModel());
                 gameStarterObject.AddModel(new MyBattleRewardModel());
+                gameStarterObject.AddModel(new MyBuildingConstructionModel());
                 
                 if (gameStarterObject is CampaignGameStarter starter)
                 {

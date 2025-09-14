@@ -24,7 +24,7 @@
         <Flags UseTeamColor="false"  Civilian="true" />
     </Item>
     <Item
-        id="mc_item_featherless_arrows"
+        id="mc_item_eagle_feather_arrows"
         name="{=mcItemEagleFeatherArrows}Eagle Feather Arrows"
         body_name="bo_capsule_arrow"
         holster_body_name="bo_axe_short"

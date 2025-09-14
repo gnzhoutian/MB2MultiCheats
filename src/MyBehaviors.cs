@@ -70,17 +70,14 @@ namespace MB2MultiCheats
             int loyalty = (int)GlobalSettings<MySettings>.Instance.DailySettlementLoyalty;
             if (loyalty > 0)
             {
-                if (settlement.IsTown || settlement.IsCastle)
+                if ((settlement.IsTown || settlement.IsCastle) && settlement?.OwnerClan?.Leader != null && settlement.OwnerClan.Leader.IsHumanPlayerCharacter)
                 {
-                    if (settlement.OwnerClan != null && settlement.OwnerClan.Leader != null && settlement.OwnerClan.Leader.IsHumanPlayerCharacter)
-                    {
-                        settlement.Town.Loyalty += loyalty;
+                    settlement.Town.Loyalty += loyalty;
 
-                        MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Name", settlement.ToString());
-                        MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Now", settlement.Town.Loyalty.ToString("0.0"));
-                        MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Add", loyalty.ToString());
-                        MCLog.Debug("{=mcMainBehaviorRewardLoyalty}Clan settlement loyalty：{MC_Main_Reward_Loyalty_Name} {MC_Main_Reward_Loyalty_Now}(+{MC_Main_Reward_Loyalty_Add})");
-                    }
+                    MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Name", settlement.ToString());
+                    MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Now", settlement.Town.Loyalty.ToString("0.0"));
+                    MBTextManager.SetTextVariable("MC_Main_Reward_Loyalty_Add", loyalty.ToString());
+                    MCLog.Debug("{=mcMainBehaviorRewardLoyalty}Clan settlement loyalty：{MC_Main_Reward_Loyalty_Name} {MC_Main_Reward_Loyalty_Now}(+{MC_Main_Reward_Loyalty_Add})");
                 }
             }
         }
