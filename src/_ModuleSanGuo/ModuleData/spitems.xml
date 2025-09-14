@@ -25,46 +25,47 @@
     </Item>
     <Item
         id="mc_item_featherless_arrows"
-        name="{=mcItemFeatherlessArrows}Featherless Arrows"
-        mesh="sg_throwing_stone"
-        culture="Culture.neutral_culture"
-        body_name="bo_sg_throwing_stone"
+        name="{=mcItemEagleFeatherArrows}Eagle Feather Arrows"
+        body_name="bo_capsule_arrow"
         holster_body_name="bo_axe_short"
-        holster_mesh="stone_holster"
-        holster_mesh_with_weapon="stone_holster"
+        mesh="arrow_bl_a"
+        holster_mesh="arrow_bl_a_quiver"
+        holster_mesh_with_weapon="arrow_bl_a_quiver"
         is_merchandise="false"
         value="480000"
-        appearance="0.1"
         weight="0.01"
-        Type="Thrown"
-        item_holsters="throwing_stone:throwing_stone_2">
+        flying_mesh="arrow_bl_flying"
+        appearance="0.1"
+        Type="Arrows"
+        item_holsters="quiver_back_top:quiver_back_top_2"
+        holster_position_shift="0,0,0.15">
         <ItemComponent>
             <Weapon
-                weapon_class="Stone"
-                ammo_class="Stone"
+                weapon_class="Arrow"
                 stack_amount="240"
+                thrust_speed="0"
+                speed_rating="0"
                 physics_material="missile"
-                accuracy="120"
-                thrust_speed="120"
-                speed_rating="120"
                 missile_speed="120"
-                weapon_length="10"
+                weapon_length="80"
                 thrust_damage="120"
                 thrust_damage_type="Blunt"
-                item_usage="stone"
-                rotation="100,30,20"
+                item_usage="arrow_right"
                 passby_sound_code="event:/mission/combat/missile/passby"
-                rotation_speed="0, -3.0, 0">
+                rotation="0, -80, 25"
+                sticking_position="0,-0.97,0"
+                sticking_rotation="90,0,0"
+                center_of_mass="0,0,-0.13"
+                modifier_group="arrow">
                 <WeaponFlags
-                    RangedWeapon="true"
                     Consumable="true"
-                    AutoReload="true"
                     CanKnockDown="true"
                     MultiplePenetration="true"
                     CanPenetrateShield="true"
-                    UseHandAsThrowBase="true" />
+                    AmmoSticksWhenShot="true"
+                    AmmoBreaksOnBounceBack="true" />
             </Weapon>
         </ItemComponent>
-        <Flags Civilian="true" />
+        <Flags />
     </Item>
 </Items>
