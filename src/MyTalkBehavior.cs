@@ -289,15 +289,9 @@ namespace MB2MultiCheats
 
             // 没有团队，或者是玩家团队，则依次取 英雄定居点所属团队，英雄最近定居点所属团队，玩家定居点所属团队
             if (targetParty == null || playerParty == targetParty)
-            {
                 if ((targetParty = target.HomeSettlement?.Party) == null)
-                {
                     if ((targetParty = target.LastKnownClosestSettlement?.Party) == null)
-                    {
                         if ((targetParty = player.HomeSettlement?.Party) == null) { }
-                    }
-                }
-            }
 
             // 有团队，或者不是流浪者
             if (targetParty != null || !target.IsWanderer)

@@ -16,38 +16,13 @@ namespace MB2MultiCheats
 {
     internal sealed class MySettings : AttributeGlobalSettings<MySettings>
     {
-        public override string Id
-        {
-            get
-            {
-                return MySubModule.ModuleName;
-            }
-        }
+        public override string Id { get; } = MySubModule.ModuleName;
 
-        public override string DisplayName
-        {
-            get
-            {
-                return MySubModule.ModuleName;
-            }
-        }
+        public override string DisplayName { get; } = MySubModule.ModuleName;
 
-        public override string FolderName
-        {
-            get
-            {
-                return MySubModule.ModuleName;
-            }
-        }
+        public override string FolderName { get; } = MySubModule.ModuleName;
 
-        public override string FormatType
-        {
-            get
-            {
-                return "json";
-            }
-        }
-
+        public override string FormatType { get; } = "json";
 
         [SettingPropertyInteger("{=mcConfigTournamentText1}Reward base for troop", 0, 9, Order = 0, RequireRestart = false,
             HintText = "{=mcConfigTournamentDesc1}The min number of guards rewarded, the default is 0, and 1 is recommended")]

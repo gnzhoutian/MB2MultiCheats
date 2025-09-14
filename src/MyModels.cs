@@ -35,13 +35,9 @@ namespace MB2MultiCheats
         public override float CalculateLearningRate(Hero hero, SkillObject skill)
         {
             if (hero.Clan == Clan.PlayerClan)
-            {
                 return base.CalculateLearningRate(hero, skill) * (float)GlobalSettings<MySettings>.Instance.ExtraLearningRate;
-            }
             else
-            {
                 return base.CalculateLearningRate(hero, skill);
-            }
         }
     }
 
@@ -50,31 +46,19 @@ namespace MB2MultiCheats
         // 精炼体力消耗
         public override int GetEnergyCostForRefining(ref Crafting.RefiningFormula refineFormula, Hero hero)
         {
-            if ((bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost)
-            {
-                return 0;
-            }
-            return base.GetEnergyCostForRefining(ref refineFormula, hero);
+            return (bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost ? 0 : base.GetEnergyCostForRefining(ref refineFormula, hero);
         }
 
         // 熔炼体力消耗
         public override int GetEnergyCostForSmelting(ItemObject item, Hero hero)
         {
-            if ((bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost)
-            {
-                return 0;
-            }
-            return base.GetEnergyCostForSmelting(item, hero);
+            return (bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost ? 0 : base.GetEnergyCostForSmelting(item, hero);
         }
 
         // 锻造体力消耗
         public override int GetEnergyCostForSmithing(ItemObject item, Hero hero)
         {
-            if ((bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost)
-            {
-                return 0;
-            }
-            return base.GetEnergyCostForSmithing(item, hero);
+            return (bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost ? 0 : base.GetEnergyCostForSmithing(item, hero);
         }
 
         // 配件解锁加成
@@ -92,27 +76,21 @@ namespace MB2MultiCheats
 
     internal class MyPregnancyModel : DefaultPregnancyModel
     {
+        // 生育难产死亡
         public override float MaternalMortalityProbabilityInLabor
         {
             get
             {
-                if ((bool)GlobalSettings<MySettings>.Instance.CloseMaternalMortality)
-                {
-                    return 0f;
-                }
-                return 0.015f;
+                return (bool)GlobalSettings<MySettings>.Instance.CloseMaternalMortality ? 0f : 0.015f;
             }
         }
 
+        // 生育小产死亡
         public override float StillbirthProbability
         {
             get
             {
-                if ((bool)GlobalSettings<MySettings>.Instance.CloseStillbirth)
-                {
-                    return 0f;
-                }
-                return 0.01f;
+                return (bool)GlobalSettings<MySettings>.Instance.CloseStillbirth ? 0f : 0.01f;
             }
         }
     }
@@ -129,14 +107,10 @@ namespace MB2MultiCheats
                 foreach (ItemModifier itemModifier in randomItem.Item.ItemComponent.ItemModifierGroup.ItemModifiers)
                 {
                     if (itemModifier.PriceMultiplier > 1f)
-                    {
                         _itemModifiers.Add(itemModifier);
-                    }
                 }
                 if (_itemModifiers.Count > 0)
-                {
                     randomItem = new EquipmentElement(randomItem.Item, _itemModifiers.GetRandomElement(), null, false);
-                }
             }
             return randomItem;
         }
@@ -145,10 +119,9 @@ namespace MB2MultiCheats
         public override float GetExpectedLootedItemValue(CharacterObject character)
         {
             if (MCRand.RandBool(GlobalSettings<MySettings>.Instance.GainLootedItemRate))
-            {
                 return base.GetExpectedLootedItemValue(character) * (float)character.Level;
-            }
-            return base.GetExpectedLootedItemValue(character);
+            else
+                return base.GetExpectedLootedItemValue(character);
         }
     }
 }

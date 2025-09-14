@@ -2,7 +2,7 @@
 <Module>
     <Name value="MB2MultiCheats"/>
     <Id value="MB2MultiCheats"/>
-    <Version value="v1.3.5"/>
+    <Version value="v1.3.6"/>
     <SingleplayerModule value="true"/>
     <MultiplayerModule value="false"/>
     <DependedModules>
