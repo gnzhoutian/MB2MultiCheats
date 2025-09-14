@@ -58,14 +58,11 @@
     <UseWinFormsOutOfProcDesigner>False</UseWinFormsOutOfProcDesigner>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MyBattleRewardModel.cs" />
-    <Compile Include="MyPregnancyModel.cs" />
+    <Compile Include="MyModels.cs" />
     <Compile Include="MySubModule.cs" />
     <Compile Include="MyBehaviors.cs" />
     <Compile Include="MySettings.cs" />
-    <Compile Include="MySmithingModel.cs" />
     <Compile Include="MyPatches.cs" />
-    <Compile Include="MyCharacterDevelopmentModel.cs" />
     <Compile Include="MyTalkBehavior.cs" />
     <Compile Include="MyUtils.cs" />
   </ItemGroup>
