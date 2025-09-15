@@ -7,8 +7,8 @@
     <ProjectGuid>{62583937-00FE-4CFB-A06C-78A97C6D08BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MultiCheats</RootNamespace>
-    <AssemblyName>MultiCheats</AssemblyName>
+    <RootNamespace>MB2MultiCheats</RootNamespace>
+    <AssemblyName>MB2MultiCheats</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -58,20 +58,24 @@
     <UseWinFormsOutOfProcDesigner>False</UseWinFormsOutOfProcDesigner>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MyPregnancyModel.cs" />
+    <Compile Include="MyModels.cs" />
     <Compile Include="MySubModule.cs" />
     <Compile Include="MyBehaviors.cs" />
     <Compile Include="MySettings.cs" />
-    <Compile Include="MySmithingModel.cs" />
     <Compile Include="MyPatches.cs" />
-    <Compile Include="MyCharacterDevelopmentModel.cs" />
+    <Compile Include="MyTalkBehavior.cs" />
+    <Compile Include="MyUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Bannerlord.UIExtenderEx, Version=2.12.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="MCMv5, Version=5.10.1.0, Culture=neutral, processorArchitecture=AMD64" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
     <Reference Include="TaleWorlds.CampaignSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />
     <Reference Include="TaleWorlds.CampaignSystem.ViewModelCollection, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />
     <Reference Include="TaleWorlds.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />
+    <Reference Include="TaleWorlds.Core.ViewModelCollection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="TaleWorlds.Library, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />
     <Reference Include="TaleWorlds.Localization, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />
     <Reference Include="TaleWorlds.MountAndBlade, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64" />

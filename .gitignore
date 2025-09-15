@@ -1,4 +1,5 @@
 /src/.vs/
 /src/obj/
 /src/bin/
-/src/*csproj.user
+/tmpbuild/
+/archives/*-debug.7z

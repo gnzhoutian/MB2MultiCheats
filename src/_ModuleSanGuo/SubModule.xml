@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Module>
-    <Name value="MultiCheats"/>
-    <Id value="MultiCheats"/>
-    <Version value="v1.0.0"/>
+    <Name value="MB2MultiCheatsSanGuo"/>
+    <Id value="MB2MultiCheatsSanGuo"/>
+    <Version value="v1.2.0"/>
     <SingleplayerModule value="true"/>
     <MultiplayerModule value="false"/>
     <DependedModules>
@@ -18,9 +18,9 @@
     </DependedModules>
     <SubModules>
         <SubModule>
-            <Name value="MultiCheats"/>
-            <DLLName value="MultiCheats.dll"/>
-            <SubModuleClassType value="MultiCheats.MySubModule"/>
+            <Name value="MB2MultiCheats"/>
+            <DLLName value="MB2MultiCheats.dll"/>
+            <SubModuleClassType value="MB2MultiCheats.MySubModule"/>
             <Tags>
                 <Tag key="DedicatedServerType" value="none" />
                 <Tag key="IsNoRenderModeElement" value="false" />

@@ -9,22 +9,29 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem;
+using Bannerlord.UIExtenderEx;
 
-namespace MultiCheats
+namespace MB2MultiCheats
 {
-    class MySubModule : MBSubModuleBase
+    internal class MySubModule : MBSubModuleBase
     {
+        public static readonly string ModuleName = typeof(MySubModule).Namespace;
+
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
             try
             {
-                new Harmony("MultiCheats").PatchAll();
+                // 初始化顺序: UIExtender -> Harmony
+                UIExtender extender = UIExtender.Create(ModuleName);
+                extender.Register(typeof(MySubModule).Assembly);
+                extender.Enable();
+
+                new Harmony(ModuleName).PatchAll();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                InformationManager.DisplayMessage(new InformationMessage(ex.Message));
+                MCLog.Error(ex);
             }
         }
 
@@ -33,18 +40,21 @@ namespace MultiCheats
             base.OnGameStart(game, gameStarterObject);
             try
             {
-                gameStarterObject.AddModel(new MySmithingModel());
                 gameStarterObject.AddModel(new MyCharacterDevelopmentModel());
+                gameStarterObject.AddModel(new MySmithingModel());
+                gameStarterObject.AddModel(new MyPregnancyModel());
+                gameStarterObject.AddModel(new MyBattleRewardModel());
+                gameStarterObject.AddModel(new MyBuildingConstructionModel());
 
                 if (gameStarterObject is CampaignGameStarter starter)
                 {
                     starter.AddBehavior(new MyBehaviors());
+                    starter.AddBehavior(new MyTalkBehavior());
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                InformationManager.DisplayMessage(new InformationMessage(ex.Message));
+                MCLog.Error(ex);
             }
         }
     }
