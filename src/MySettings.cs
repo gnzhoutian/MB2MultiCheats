@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,9 @@ using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v1;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.Global;
+using TaleWorlds.CampaignSystem;
+using TaleWorlds.Localization;
+using static HarmonyLib.Code;
 
 namespace MultiCheats
 {
@@ -43,61 +47,91 @@ namespace MultiCheats
                 return "json";
             }
         }
+
         
-        [SettingPropertyInteger("兵种奖励基数", 0, 9, Order = 0, RequireRestart = false, HintText = "亲卫兵种奖励最少数量，默认为0名，推荐1名")]
-        [SettingPropertyGroup("竞技大赛", GroupOrder = 0)]
+        [SettingPropertyInteger("{=mcConfigTournamentText1}Reward base for troop", 0, 9, Order = 0, RequireRestart = false, 
+            HintText = "{=mcConfigTournamentDesc1}The min number of guards rewarded, the default is 0, and 1 is recommended")]
+        [SettingPropertyGroup("{=mcConfigTournament}Tournament", GroupOrder = 0)]
         public int ExtraRewardTroopMin { get; set; } = 0;
 
-        [SettingPropertyInteger("兵种奖励区间", 0, 9, Order = 1, RequireRestart = false, HintText = "亲卫兵种奖励随机区间，默认为0名，推荐2名")]
-        [SettingPropertyGroup("竞技大赛", GroupOrder = 0)]
+        [SettingPropertyInteger("{=mcConfigTournamentText2}Reward range for troop", 0, 9, Order = 1, RequireRestart = false, 
+            HintText = "{=mcConfigTournamentDesc2}The random interval of guards rewarded, the default is 0, and 2 is recommended")]
+        [SettingPropertyGroup("{=mcConfigTournament}Tournament", GroupOrder = 0)]
         public int ExtraRewardTroopRange { get; set; } = 0;
 
-        [SettingPropertyInteger("物品奖励概率", 0, 100, Order = 2, RequireRestart = false, HintText = "神级物品奖励概率，默认为0%，推荐20%")]
-        [SettingPropertyGroup("竞技大赛", GroupOrder = 0)]
+        [SettingPropertyInteger("{=mcConfigTournamentText3}Reward probability for item", 0, 100, Order = 2, RequireRestart = false, 
+            HintText = "{=mcConfigTournamentDesc3}The probability of rewarding god-level items, the default is 0%, and 20% is recommended")]
+        [SettingPropertyGroup("{=mcConfigTournament}Tournament", GroupOrder = 0)]
         public int ExtraRewardItemRate { get; set; } = 0;
         
         
-        [SettingPropertyInteger("六维最大属性", 10, 20, Order = 0, RequireRestart = false, HintText = "六维最大属性点，默认为10点，推荐20点")]
-        [SettingPropertyGroup("技能升级", GroupOrder = 1)]
+        [SettingPropertyInteger("{=mcConfigSkillLevelupText1}Max attribute", 10, 20, Order = 0, RequireRestart = false, 
+            HintText = "{=mcConfigSkillLevelupDesc1}Six dimensions max attribute, the default is 10, and 20 is recommended")]
+        [SettingPropertyGroup("{=mcConfigSkillLevelup}Skill Levelup", GroupOrder = 1)]
         public int MaxAttribute { get; set; } = 10;
 
-        [SettingPropertyInteger("技能最大专精", 5, 10, Order = 1, RequireRestart = false, HintText = "技能最大专精点，默认为5点，推荐10点")]
-        [SettingPropertyGroup("技能升级", GroupOrder = 1)]
+        [SettingPropertyInteger("{=mcConfigSkillLevelupText2}Max focus per skill", 5, 10, Order = 1, RequireRestart = false, 
+            HintText = "{=mcConfigSkillLevelupDesc2}Max focus per skill, the default is 5, and 10 is recommended")]
+        [SettingPropertyGroup("{=mcConfigSkillLevelup}Skill Levelup", GroupOrder = 1)]
         public int MaxFocusPerSkill { get; set; } = 5;
-        
-        [SettingPropertyInteger("学习效率加成", 1, 100, Order = 2, RequireRestart = false, HintText = "家族成员技能学习效率后台加成倍率，默认为1倍，推荐10倍")]
-        [SettingPropertyGroup("技能升级", GroupOrder = 1)]
+
+        [SettingPropertyInteger("{=mcConfigSkillLevelupText3}Learning rate", 1, 100, Order = 2, RequireRestart = false,
+            HintText = "{=mcConfigSkillLevelupDesc3}The learning Rate of clan members, the default is 1, and 10 is recommended")]
+        [SettingPropertyGroup("{=mcConfigSkillLevelup}Skill Levelup", GroupOrder = 1)]
         public int ExtraLearningRate { get; set; } = 1;
 
-        [SettingProperty("自动激活特性", Order = 3, RequireRestart = false, HintText = "家族成员技能升级时自动激活Perk，默认为关，推荐开")]
-        [SettingPropertyGroup("技能升级", GroupOrder = 1)]
+        [SettingProperty("{=mcConfigSkillLevelupText4}Auto take both perks", Order = 3, RequireRestart = false, 
+            HintText = "{=mcConfigSkillLevelupDesc4}Clan members auto take both perks when skill levelup, the default is false, and true is recommended")]
+        [SettingPropertyGroup("{=mcConfigSkillLevelup}Skill Levelup", GroupOrder = 1)]
         public bool AutoTakeBothPerks { get; set; } = false;
 
 
-        [SettingPropertyInteger("每级额外属性", 0, 9, Order = 0, RequireRestart = false, HintText = "每级后台额外奖励属性点，默认为0点，推荐2点")]
-        [SettingPropertyGroup("角色升级", GroupOrder = 2)]
+        [SettingPropertyInteger("{=mcConfigRoleLevelupText1}Extra attribute per level", 0, 9, Order = 0, RequireRestart = false, 
+            HintText = "{=mcConfigRoleLevelupDesc1}Extra attribute per level, the default is 0, and 2 is recommended")]
+        [SettingPropertyGroup("{=mcConfigRoleLevelup}Role Levelup", GroupOrder = 2)]
         public int LevelupExtraAttribute { get; set; } = 0;
 
-        [SettingPropertyInteger("每级额外专精", 0, 9, Order = 1, RequireRestart = false, HintText = "每级后台额外奖励专精点，默认为0点，推荐2点")]
-        [SettingPropertyGroup("角色升级", GroupOrder = 2)]
+        [SettingPropertyInteger("{=mcConfigRoleLevelupText2}Extra focus per level", 0, 9, Order = 1, RequireRestart = false, 
+            HintText = "{=mcConfigRoleLevelupDesc2}Extra focus per level, the default is 0, and 2 is recommended")]
+        [SettingPropertyGroup("{=mcConfigRoleLevelup}Role Levelup", GroupOrder = 2)]
         public int LevelupExtraFocus { get; set; } = 0;
 
-        [SettingProperty("同伴追加点数", Order = 3, RequireRestart = false, HintText = "家族成员属性专精点同时为0时，对话后追加等级额外点数，默认为关，推荐开")]
-        [SettingPropertyGroup("角色升级", GroupOrder = 2)]
+        [SettingProperty("{=mcConfigRoleLevelupText3}Clan members append points", Order = 3, RequireRestart = false, 
+            HintText = "{=mcConfigRoleLevelupDesc3}When the unused attribute and focus points of clan members are both 0, additional level points will be added after the conversation, the default is false, and true is recommended")]
+        [SettingPropertyGroup("{=mcConfigRoleLevelup}Role Levelup", GroupOrder = 2)]
         public bool CompanionAppendAttributeAndFocus { get; set; } = false;
 
-        [SettingPropertyInteger("锻造经验加成", 1, 100, Order = 0, RequireRestart = false, HintText = "自由锻造经验加成倍率，默认为1倍，推荐10倍")]
-        [SettingPropertyGroup("锻造", GroupOrder = 3)]
+        [SettingPropertyInteger("{=mcConfigSmithingText1}Smithing XP rate", 1, 100, Order = 0, RequireRestart = false, 
+            HintText = "{=mcConfigSmithingDesc1}Skill XP rate for smithing in free build mode, the default is 1, and 10 is recommended")]
+        [SettingPropertyGroup("{=mcConfigSmithing}Smithing", GroupOrder = 3)]
         public int FreeSmithingXpRate { get; set; } = 1;
-        
-        [SettingPropertyInteger("配件解锁加成", 1, 100, Order = 1, RequireRestart = false, HintText = "配件解锁速度加成倍率，默认为1倍，推荐10倍")]
-        [SettingPropertyGroup("锻造", GroupOrder = 3)]
+
+        [SettingPropertyInteger("{=mcConfigSmithingText2}Research rate for new part", 1, 100, Order = 1, RequireRestart = false, 
+            HintText = "{=mcConfigSmithingDesc2}Research rate for unlocking new part, the default is 1, and 10 is recommended")]
+        [SettingPropertyGroup("{=mcConfigSmithing}Smithing", GroupOrder = 3)]
         public int NewPartUnlockRate { get; set; } = 1;
 
+        [SettingProperty("{=mcConfigSmithingText3}Smithing without energy", Order = 3, RequireRestart = false, 
+            HintText = "{=mcConfigSmithingDesc3}Smithing without cost energy, the default is false, and true is recommended")]
+        [SettingPropertyGroup("{=mcConfigSmithing}Smithing", GroupOrder = 3)]
+        public bool SmithingWithoutEnergyCost { get; set; } = false;
 
-        [SettingPropertyInteger("每日奖励忠诚", 0, 9, Order = 0, RequireRestart = false, HintText = "家族定居点每日后台奖励忠诚，默认为0点，推荐2点")]
-        [SettingPropertyGroup("定居点", GroupOrder = 4)]
+
+        [SettingPropertyInteger("{=mcConfigSettlementText1}Reward loyalty daily", 0, 9, Order = 0, RequireRestart = false, 
+            HintText = "{=mcConfigSettlementDesc1}Clan settlements daily rewards loyalty, the default is 0, and 2 is recommended")]
+        [SettingPropertyGroup("{=mcConfigSettlement}Settlement", GroupOrder = 4)]
         public int DailySettlementLoyalty { get; set; } = 0;
+
+
+        [SettingProperty("{=mcConfigPregnancyText1}Disable maternal mortality", Order = 0, RequireRestart = false, 
+            HintText = "{=mcConfigPregnancyDesc1}Disable maternal mortality, the default is false, and true is recommended")]
+        [SettingPropertyGroup("{=mcConfigPregnancy}Pregnancy", GroupOrder = 5)]
+        public bool CloseMaternalMortality { get; set; } = false;
+
+        [SettingProperty("{=mcConfigPregnancyText2}Disable stillbirth", Order = 1, RequireRestart = false, 
+            HintText = "{=mcConfigPregnancyDesc2}Disable stillbirth, the default is false, and true is recommended")]
+        [SettingPropertyGroup("{=mcConfigPregnancy}Pregnancy", GroupOrder = 5)]
+        public bool CloseStillbirth { get; set; } = false;
     }
 }
 
