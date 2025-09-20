@@ -16,9 +16,9 @@
             <skill id="OneHanded" value="0"/>
             <skill id="TwoHanded" value="0"/>
             <skill id="Polearm" value="720"/>
-            <skill id="Bow" value="0"/>
+            <skill id="Bow" value="720"/>
             <skill id="Crossbow" value="0"/>
-            <skill id="Throwing" value="720"/>
+            <skill id="Throwing" value="0"/>
         </skills>
         <Equipments>
             <EquipmentRoster>

@@ -1,10 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
+using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.ObjectSystem;
+using TaleWorlds.CampaignSystem;
 
 namespace MB2MultiCheats
 {
@@ -22,7 +27,7 @@ namespace MB2MultiCheats
         // 返回百分比概率结论
         public static bool RandBool(int rate)
         {
-            return (rand.Next(0, 100) < rate);
+            return (rand.Next(0, 100) < rate);   
         }
     }
 

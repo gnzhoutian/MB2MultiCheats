@@ -1,14 +1,18 @@
-﻿using MCM.Abstractions.Base.Global;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaleWorlds.CampaignSystem.GameComponents;
-using TaleWorlds.CampaignSystem;
+
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
+using TaleWorlds.ObjectSystem;
+using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
+using TaleWorlds.CampaignSystem.GameComponents;
+using TaleWorlds.CampaignSystem.ComponentInterfaces;
 
 namespace MB2MultiCheats
 {
@@ -19,7 +23,7 @@ namespace MB2MultiCheats
         {
             get
             {
-                return (int)GlobalSettings<MySettings>.Instance.MaxAttribute;
+                return (int)MySettings.Instance.MaxAttribute;
             }
         }
 
@@ -28,7 +32,7 @@ namespace MB2MultiCheats
         {
             get
             {
-                return (int)GlobalSettings<MySettings>.Instance.MaxFocusPerSkill;
+                return (int)MySettings.Instance.MaxFocusPerSkill;
             }
         }
 
@@ -36,9 +40,10 @@ namespace MB2MultiCheats
         public override float CalculateLearningRate(Hero hero, SkillObject skill)
         {
             if (hero.Clan == Clan.PlayerClan)
-                return base.CalculateLearningRate(hero, skill) * (float)GlobalSettings<MySettings>.Instance.ExtraLearningRate;
-            else
-                return base.CalculateLearningRate(hero, skill);
+            {
+                return base.CalculateLearningRate(hero, skill) * (float)MySettings.Instance.ExtraLearningRate;
+            }
+            return base.CalculateLearningRate(hero, skill);
         }
     }
 
@@ -47,31 +52,31 @@ namespace MB2MultiCheats
         // 精炼体力消耗
         public override int GetEnergyCostForRefining(ref Crafting.RefiningFormula refineFormula, Hero hero)
         {
-            return (bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost ? 0 : base.GetEnergyCostForRefining(ref refineFormula, hero);
+            return (bool)MySettings.Instance.SmithingWithoutEnergyCost ? 0 : base.GetEnergyCostForRefining(ref refineFormula, hero);
         }
 
         // 熔炼体力消耗
         public override int GetEnergyCostForSmelting(ItemObject item, Hero hero)
         {
-            return (bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost ? 0 : base.GetEnergyCostForSmelting(item, hero);
+            return (bool)MySettings.Instance.SmithingWithoutEnergyCost ? 0 : base.GetEnergyCostForSmelting(item, hero);
         }
 
         // 锻造体力消耗
         public override int GetEnergyCostForSmithing(ItemObject item, Hero hero)
         {
-            return (bool)GlobalSettings<MySettings>.Instance.SmithingWithoutEnergyCost ? 0 : base.GetEnergyCostForSmithing(item, hero);
+            return (bool)MySettings.Instance.SmithingWithoutEnergyCost ? 0 : base.GetEnergyCostForSmithing(item, hero);
         }
 
         // 配件解锁加成
         public override float ResearchPointsNeedForNewPart(int totalPartCount, int openedPartCount)
         {
-            return base.ResearchPointsNeedForNewPart(totalPartCount, openedPartCount) / (float)GlobalSettings<MySettings>.Instance.NewPartUnlockRate;
+            return base.ResearchPointsNeedForNewPart(totalPartCount, openedPartCount) / (float)MySettings.Instance.NewPartUnlockRate;
         }
 
         // 锻造经验加成
         public override int GetSkillXpForSmithingInFreeBuildMode(ItemObject item)
         {
-            return base.GetSkillXpForSmithingInFreeBuildMode(item) * (int)GlobalSettings<MySettings>.Instance.FreeSmithingXpRate;
+            return base.GetSkillXpForSmithingInFreeBuildMode(item) * (int)MySettings.Instance.FreeSmithingXpRate;
         }
     }
 
@@ -82,7 +87,7 @@ namespace MB2MultiCheats
         {
             get
             {
-                return (bool)GlobalSettings<MySettings>.Instance.CloseMaternalMortality ? 0f : 0.015f;
+                return (bool)MySettings.Instance.CloseMaternalMortality ? 0f : 0.015f;
             }
         }
 
@@ -91,7 +96,7 @@ namespace MB2MultiCheats
         {
             get
             {
-                return (bool)GlobalSettings<MySettings>.Instance.CloseStillbirth ? 0f : 0.01f;
+                return (bool)MySettings.Instance.CloseStillbirth ? 0f : 0.01f;
             }
         }
     }
@@ -103,9 +108,37 @@ namespace MB2MultiCheats
         {
             if (town?.OwnerClan?.Leader != null && town.OwnerClan.Leader.IsHumanPlayerCharacter)
             {
-                return base.GetBoostAmount(town) + (town.IsCastle ? CastleBoostBonus : TownBoostBonus) * (GlobalSettings<MySettings>.Instance.DailySettlementBoostBonus - 1);
+                return base.GetBoostAmount(town) + (town.IsCastle ? CastleBoostBonus : TownBoostBonus) * (MySettings.Instance.DailySettlementBoostBonus - 1);
             }
             return base.GetBoostAmount(town);
+        }
+    }
+
+    // 部队俘虏限制增益
+    internal class MyPartySizeLimitModel : DefaultPartySizeLimitModel
+    {
+        public override ExplainedNumber GetPartyPrisonerSizeLimit(PartyBase party, bool includeDescriptions = false)
+        {
+            if (party.IsMobile && party.MobileParty.IsMainParty && MySettings.Instance.GainPrisonerSizeLimit > 1)
+            {
+                ExplainedNumber rst = base.GetPartyPrisonerSizeLimit(party, includeDescriptions);
+                rst.Add(rst.BaseNumber * (float)(MySettings.Instance.GainPrisonerSizeLimit - 1), new TextObject("{=mcGainPrisonerSizeLimit}Prisoner extra gain"));
+                return rst;
+            }
+            return base.GetPartyPrisonerSizeLimit(party, includeDescriptions);
+        }
+    }
+
+    // 部队俘虏招募增益
+    internal class MyPrisonerRecruitmentCalculationModel: DefaultPrisonerRecruitmentCalculationModel
+    {
+        public override int GetConformityChangePerHour(PartyBase party, CharacterObject troopToBoost)
+        {
+            if (party.IsMobile && party.MobileParty.IsMainParty && MySettings.Instance.GainPrisonerRecruitmentRate > 1)
+            {
+                return base.GetConformityChangePerHour(party, troopToBoost) * MySettings.Instance.GainPrisonerRecruitmentRate;
+            }
+            return base.GetConformityChangePerHour(party, troopToBoost);
         }
     }
 
@@ -115,7 +148,7 @@ namespace MB2MultiCheats
         public override EquipmentElement GetLootedItemFromTroop(CharacterObject character, float targetValue)
         {
             EquipmentElement randomItem = base.GetLootedItemFromTroop(character, targetValue);
-            if (randomItem.ItemModifier != null && randomItem.ItemModifier.PriceMultiplier > 1f && MCRand.RandBool(GlobalSettings<MySettings>.Instance.GainLootedItemRate))
+            if (randomItem.ItemModifier != null && randomItem.ItemModifier.PriceMultiplier > 1f && MCRand.RandBool(MySettings.Instance.GainLootedItemRate))
             {
                 MBList<ItemModifier> _itemModifiers = new MBList<ItemModifier>();
                 foreach (ItemModifier itemModifier in randomItem.Item.ItemComponent.ItemModifierGroup.ItemModifiers)
@@ -132,13 +165,25 @@ namespace MB2MultiCheats
         // 战利品最大价值增益
         public override float GetExpectedLootedItemValue(CharacterObject character)
         {
-            if (MCRand.RandBool(GlobalSettings<MySettings>.Instance.GainLootedItemRate))
+            if (MCRand.RandBool(MySettings.Instance.GainLootedItemRate))
+            {
                 return base.GetExpectedLootedItemValue(character) * (float)character.Level;
-            else
-                return base.GetExpectedLootedItemValue(character);
+            }
+            return base.GetExpectedLootedItemValue(character);
         }
     }
 
-
-
+    // 战争岂是儿戏
+    internal class MyDiplomacyModel: DefaultDiplomacyModel
+    {
+        public override int GetInfluenceCostOfProposingPeace(Clan proposingClan)
+        {
+            Clan playerClan = Clan.PlayerClan;
+            if (playerClan.Tier >= 6 && playerClan.Kingdom != null && (proposingClan.Kingdom == playerClan.Kingdom || playerClan.IsAtWarWith(proposingClan)))
+            {
+                return base.GetInfluenceCostOfProposingPeace(proposingClan) * MySettings.Instance.WarIsNoJoke;
+            }
+            return base.GetInfluenceCostOfProposingPeace(proposingClan);
+        }
+    }
 }

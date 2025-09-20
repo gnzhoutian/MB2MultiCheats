@@ -1,17 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using HarmonyLib;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.ObjectSystem;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Settlements;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting;
 using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
 
+using HarmonyLib;
 
 namespace MB2MultiCheats.Patches
 {

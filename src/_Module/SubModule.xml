@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Module>
-    <Name value="MB2MultiCheatsSanGuo"/>
-    <Id value="MB2MultiCheatsSanGuo"/>
-    <Version value="v1.2.0"/>
+    <Name value="MOD_NAME"/>
+    <Id value="MOD_NAME"/>
+    <Version value="MOD_VERSION"/>
     <SingleplayerModule value="true"/>
     <MultiplayerModule value="false"/>
     <DependedModules>
@@ -31,10 +31,11 @@
         <XmlNode>
             <XmlName id="Items" path="spitems"/>
             <IncludedGameTypes>
-                <GameType value = "Campaign"/>
-                <GameType value = "CampaignStoryMode"/>
+                <GameType value="Campaign"/>
+                <GameType value="CampaignStoryMode"/>
                 <GameType value="CustomGame"/>
                 <GameType value="EditorGame"/>
+                <GameType value="ShokuhoCampaign"/>
             </IncludedGameTypes>
         </XmlNode>
         <XmlNode>
@@ -44,6 +45,7 @@
                 <GameType value="CampaignStoryMode"/>
                 <GameType value="CustomGame"/>
                 <GameType value="EditorGame"/>
+                <GameType value="ShokuhoCampaign"/>
             </IncludedGameTypes>
         </XmlNode>
     </Xmls>

@@ -1,25 +1,25 @@
-﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TaleWorlds.CampaignSystem;
+using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.ObjectSystem;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.Roster;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Pages;
 
 using HarmonyLib;
 using Bannerlord.UIExtenderEx.Attributes;
 using Bannerlord.UIExtenderEx.ViewModels;
 using Bannerlord.UIExtenderEx.Prefabs2;
-
 
 namespace MB2MultiCheats
 {
@@ -78,7 +78,7 @@ namespace MB2MultiCheats
         {
             get
             {
-                return hero != null && hero != Hero.MainHero && hero.IsAlive;
+                return MySettings.Instance.EnableSendMessenger && hero != null && hero != Hero.MainHero && hero.IsAlive;
             }
         }
 
@@ -87,9 +87,9 @@ namespace MB2MultiCheats
         {
             get
             {
-                return hero != null && hero != Hero.MainHero && hero.IsActive
-                    && hero != MyTalkBehavior.MeetingHero
-                    && !MyTalkBehavior.MessengerSended(hero);
+                return MySettings.Instance.EnableSendMessenger && hero != null && hero != Hero.MainHero && hero.IsActive
+                    && Hero.MainHero.Gold >= cost
+                    && hero != MyTalkBehavior.MeetingHero && !MyTalkBehavior.MessengerSended(hero);
             }
         }
     }
@@ -185,11 +185,13 @@ namespace MB2MultiCheats
             CampaignEvents.ConversationEnded.AddNonSerializedListener(this, OnConversationEnded);
         }
 
-        public override void SyncData(IDataStore dataStore) { }
+        public override void SyncData(IDataStore dataStore)
+        {
+        }
+
+        public static Hero MeetingHero { get; private set; } = null;
 
         private static LinkedList<Messenger> Messengers = new LinkedList<Messenger>();
-
-        private static Hero meetingHero = null;
 
         private static PlayerEncounter keepEncounter = null;
 
@@ -239,7 +241,7 @@ namespace MB2MultiCheats
                 AccessTools.Property(typeof(Campaign), "LocationEncounter").SetValue(Campaign.Current, keepLocation);
                 Hero.MainHero.PartyBelongedTo.CurrentSettlement = keepSettlement;
 
-                meetingHero = null;
+                MeetingHero = null;
                 keepEncounter = null;
                 keepLocation = null;
                 keepSettlement = null;
@@ -251,15 +253,7 @@ namespace MB2MultiCheats
         {
             get
             {
-                return meetingHero != null;
-            }
-        }
-
-        public static Hero MeetingHero
-        {
-            get
-            {
-                return meetingHero;
+                return MeetingHero != null;
             }
         }
 
@@ -309,7 +303,7 @@ namespace MB2MultiCheats
                 // 开始遭遇
                 PlayerEncounter.Start();
                 PlayerEncounter.Current.SetupFields(playerParty, targetParty ?? playerParty);
-                meetingHero = target;
+                MeetingHero = target;
 
                 Campaign.Current.TimeControlMode = CampaignTimeControlMode.Stop;
                 Campaign.Current.CurrentConversationContext = ConversationContext.Default;

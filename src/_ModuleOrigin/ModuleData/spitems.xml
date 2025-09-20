@@ -21,7 +21,7 @@
                 modifier_group="plate"
                 material_type="Plate" />
         </ItemComponent>
-        <Flags UseTeamColor="false"  Civilian="true" />
+        <Flags UseTeamColor="false" Civilian="true" />
     </Item>
     <Item
         id="mc_item_eagle_feather_arrows"
@@ -46,8 +46,8 @@
                 thrust_speed="0"
                 speed_rating="0"
                 physics_material="missile"
-                missile_speed="120"
                 weapon_length="80"
+                missile_speed="120"
                 thrust_damage="120"
                 thrust_damage_type="Blunt"
                 item_usage="arrow_right"
@@ -57,11 +57,10 @@
                 sticking_rotation="90,0,0"
                 center_of_mass="0,0,-0.13"
                 modifier_group="arrow">
-                <WeaponFlags 
+                <WeaponFlags
                     Consumable="true"
-                    CanKnockDown="true"
-                    MultiplePenetration="true"
                     CanPenetrateShield="true"
+                    MultiplePenetration="true"
                     AmmoSticksWhenShot="true"
                     AmmoBreaksOnBounceBack="true" />
             </Weapon>

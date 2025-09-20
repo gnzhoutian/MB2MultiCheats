@@ -1,14 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using HarmonyLib;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
-using TaleWorlds.MountAndBlade;
+using TaleWorlds.Localization;
+using TaleWorlds.ObjectSystem;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.MountAndBlade;
+
+using HarmonyLib;
 using Bannerlord.UIExtenderEx;
 
 namespace MB2MultiCheats
@@ -43,8 +46,11 @@ namespace MB2MultiCheats
                 gameStarterObject.AddModel(new MyCharacterDevelopmentModel());
                 gameStarterObject.AddModel(new MySmithingModel());
                 gameStarterObject.AddModel(new MyPregnancyModel());
-                gameStarterObject.AddModel(new MyBattleRewardModel());
                 gameStarterObject.AddModel(new MyBuildingConstructionModel());
+                gameStarterObject.AddModel(new MyPartySizeLimitModel());
+                gameStarterObject.AddModel(new MyPrisonerRecruitmentCalculationModel());
+                gameStarterObject.AddModel(new MyBattleRewardModel());
+                gameStarterObject.AddModel(new MyDiplomacyModel());
 
                 if (gameStarterObject is CampaignGameStarter starter)
                 {

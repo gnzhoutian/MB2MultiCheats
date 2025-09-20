@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
-using MCM.Abstractions.Base.Global;
-using TaleWorlds.Localization;
 
 namespace MB2MultiCheats
 {
@@ -32,9 +31,9 @@ namespace MB2MultiCheats
         {
             if (winner != null && winner.IsHero && winner.IsPlayerCharacter)
             {
-                int min = GlobalSettings<MySettings>.Instance.ExtraRewardTroopMin;
-                int range = GlobalSettings<MySettings>.Instance.ExtraRewardTroopRange;
-                int rate = GlobalSettings<MySettings>.Instance.ExtraRewardItemRate;
+                int min = MySettings.Instance.ExtraRewardTroopMin;
+                int range = MySettings.Instance.ExtraRewardTroopRange;
+                int rate = MySettings.Instance.ExtraRewardItemRate;
 
                 int num = Math.Min(MCRand.RandNum(min, range),MobileParty.MainParty.LimitedPartySize - MobileParty.MainParty.Party.NumberOfAllMembers);
 
@@ -67,7 +66,7 @@ namespace MB2MultiCheats
         // 定居点忠诚奖励
         private void DailyAddLoyaltyForSettlement(Settlement settlement)
         {
-            int loyalty = (int)GlobalSettings<MySettings>.Instance.DailySettlementLoyalty;
+            int loyalty = (int)MySettings.Instance.DailySettlementLoyalty;
             if (loyalty > 0)
             {
                 if ((settlement.IsTown || settlement.IsCastle) && settlement?.OwnerClan?.Leader != null && settlement.OwnerClan.Leader.IsHumanPlayerCharacter)
@@ -87,15 +86,15 @@ namespace MB2MultiCheats
         {
             if (hero.Clan == Clan.PlayerClan)
             {
-                hero.HeroDeveloper.UnspentAttributePoints += (int)GlobalSettings<MySettings>.Instance.LevelupExtraAttribute;
-                hero.HeroDeveloper.UnspentFocusPoints += (int)GlobalSettings<MySettings>.Instance.LevelupExtraFocus;
+                hero.HeroDeveloper.UnspentAttributePoints += (int)MySettings.Instance.LevelupExtraAttribute;
+                hero.HeroDeveloper.UnspentFocusPoints += (int)MySettings.Instance.LevelupExtraFocus;
             }
         }
 
         // 技能升级自动激活Perk点
         private void GainedSkillAutoAddPerks(Hero hero, SkillObject skill, int crap1, bool crap2)
         {
-            if (hero.Clan == Clan.PlayerClan && (bool)GlobalSettings<MySettings>.Instance.AutoTakeBothPerks)
+            if (hero.Clan == Clan.PlayerClan && (bool)MySettings.Instance.AutoTakeBothPerks)
             {
                 MBTextManager.SetTextVariable("MC_Main_Active_Perk_Hero", hero.ToString());
 
@@ -125,7 +124,7 @@ namespace MB2MultiCheats
         // 家族成员对话后追加属性点专精点等级奖励
         private void CompanionAppendAttributeAndFocus(IEnumerable<CharacterObject> heros)
         {
-            if ((bool)GlobalSettings<MySettings>.Instance.CompanionAppendAttributeAndFocus) {
+            if ((bool)MySettings.Instance.CompanionAppendAttributeAndFocus) {
                 foreach (CharacterObject obj in heros)
                 {
                     if (!obj.IsPlayerCharacter && obj.IsHero && obj.HeroObject.Clan == Clan.PlayerClan && obj.HeroObject.IsActive)
@@ -135,10 +134,10 @@ namespace MB2MultiCheats
                         int focusPoints = 0;
 
                         if (hero.HeroDeveloper.UnspentAttributePoints == 0)
-                            attrPoints = hero.Level * (int)GlobalSettings<MySettings>.Instance.LevelupExtraAttribute;
+                            attrPoints = hero.Level * (int)MySettings.Instance.LevelupExtraAttribute;
 
                         if (hero.HeroDeveloper.UnspentFocusPoints == 0)
-                            focusPoints = hero.Level * (int)GlobalSettings<MySettings>.Instance.LevelupExtraFocus;
+                            focusPoints = hero.Level * (int)MySettings.Instance.LevelupExtraFocus;
 
                         if (attrPoints != 0 || focusPoints != 0)
                         {
