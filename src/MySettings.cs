@@ -96,15 +96,15 @@ namespace MB2MultiCheats
         [SettingPropertyGroup("{=mcConfigSettlement}Settlement", GroupOrder = 4)]
         public int DailySettlementLoyalty { get; set; } = 0;
 
-        [SettingPropertyInteger("{=mcConfigSettlementText2}Construction speed bonus rate", 1, 10, Order = 1, RequireRestart = false,
+        [SettingPropertyInteger("{=mcConfigSettlementText2}Construction speed bonus rate", 0, 9, Order = 1, RequireRestart = false,
             HintText = "{=mcConfigSettlementDesc2}Clan settlements daily construction speed bonus rate, the default is 1x, and 2x is recommended")]
         [SettingPropertyGroup("{=mcConfigSettlement}Settlement", GroupOrder = 4)]
-        public int DailySettlementBoostBonus { get; set; } = 1;
+        public int DailySettlementBoostBonus { get; set; } = 0;
 
-        [SettingPropertyInteger("{=mcConfigSettlementText3}Gain settlement tax by governor", 1, 10, Order = 2, RequireRestart = false,
+        [SettingPropertyInteger("{=mcConfigSettlementText3}Gain settlement tax by governor", 0, 9, Order = 2, RequireRestart = false,
             HintText = "{=mcConfigSettlementDesc3}Clan settlements daily tax gain by governor, the default is 1x, and 2x is recommended")]
         [SettingPropertyGroup("{=mcConfigSettlement}Settlement", GroupOrder = 4)]
-        public int GainSettlementTaxByGovernor { get; set; } = 1;
+        public int GainSettlementTaxByGovernor { get; set; } = 0;
 
         [SettingPropertyInteger("{=mcConfigBattleText1}Gain prisoner size limit", 1, 10, Order = 0, RequireRestart = false,
                     HintText = "{=mcConfigBattleDesc1}Increase the MainParty of prisoner size limit, the default is 1x, and 2x is recommended")]

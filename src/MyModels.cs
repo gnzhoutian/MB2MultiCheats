@@ -107,9 +107,9 @@ namespace MB2MultiCheats
         // 定居点建设速度增益
         public override int GetBoostAmount(Town town)
         {
-            if (town?.OwnerClan?.Leader != null && town.OwnerClan.Leader.IsHumanPlayerCharacter)
+            if (town?.OwnerClan?.Leader != null && town.OwnerClan.Leader.IsHumanPlayerCharacter && MySettings.Instance.DailySettlementBoostBonus > 0)
             {
-                return base.GetBoostAmount(town) + (town.IsCastle ? CastleBoostBonus : TownBoostBonus) * (MySettings.Instance.DailySettlementBoostBonus - 1);
+                return base.GetBoostAmount(town) + (town.IsCastle ? CastleBoostBonus : TownBoostBonus) * MySettings.Instance.DailySettlementBoostBonus;
             }
             return base.GetBoostAmount(town);
         }
@@ -121,13 +121,11 @@ namespace MB2MultiCheats
         public override ExplainedNumber CalculateTownTax(Town town, bool includeDescriptions = false)
         {
             ExplainedNumber result = base.CalculateTownTax(town, includeDescriptions);
-
-            if ((town.IsTown || town.IsCastle) && town.Governor?.Clan == Clan.PlayerClan && MySettings.Instance.GainSettlementTaxByGovernor > 1)
+            if ((town.IsTown || town.IsCastle) && town.Governor?.Clan == Clan.PlayerClan && MySettings.Instance.GainSettlementTaxByGovernor > 0)
             {
                 if (town.Governor.GetPerkValue(DefaultPerks.Steward.PriceOfLoyalty))
                 {
-                    int num = town.Governor.GetSkillValue(DefaultSkills.Steward) * MySettings.Instance.GainSettlementTaxByGovernor;
-                    result.AddFactor(DefaultPerks.Steward.PriceOfLoyalty.SecondaryBonus * (float)num, DefaultPerks.Steward.PriceOfLoyalty.Name);
+                    result.AddFactor((float)(town.Governor.GetSkillValue(DefaultSkills.Steward) * MySettings.Instance.GainSettlementTaxByGovernor) / 100f);
                 }
             }
             return result;

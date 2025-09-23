@@ -42,6 +42,7 @@ if [ "$1"x != ""x ];then
     make_mod MB2MultiCheats Origin
     make_mod MB2MultiCheatsSanGuo SanGuo
     make_mod MB2MultiCheatsShokuho Shokuho
+    date
 else
     echo "入参错误，示例: ./make7z.sh 1.2.0/1.2.0-debug"
 fi
