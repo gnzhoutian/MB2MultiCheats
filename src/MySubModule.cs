@@ -47,6 +47,7 @@ namespace MB2MultiCheats
                 gameStarterObject.AddModel(new MySmithingModel());
                 gameStarterObject.AddModel(new MyPregnancyModel());
                 gameStarterObject.AddModel(new MyBuildingConstructionModel());
+                gameStarterObject.AddModel(new MySettlementTaxModel());
                 gameStarterObject.AddModel(new MyPartySizeLimitModel());
                 gameStarterObject.AddModel(new MyPrisonerRecruitmentCalculationModel());
                 gameStarterObject.AddModel(new MyBattleRewardModel());

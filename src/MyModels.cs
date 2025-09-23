@@ -13,6 +13,7 @@ using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.ComponentInterfaces;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
 
 namespace MB2MultiCheats
 {
@@ -114,9 +115,28 @@ namespace MB2MultiCheats
         }
     }
 
-    // 部队俘虏限制增益
+    internal class MySettlementTaxModel: DefaultSettlementTaxModel
+    {
+        // 定居点总督税收增益
+        public override ExplainedNumber CalculateTownTax(Town town, bool includeDescriptions = false)
+        {
+            ExplainedNumber result = base.CalculateTownTax(town, includeDescriptions);
+
+            if ((town.IsTown || town.IsCastle) && town.Governor?.Clan == Clan.PlayerClan && MySettings.Instance.GainSettlementTaxByGovernor > 1)
+            {
+                if (town.Governor.GetPerkValue(DefaultPerks.Steward.PriceOfLoyalty))
+                {
+                    int num = town.Governor.GetSkillValue(DefaultSkills.Steward) * MySettings.Instance.GainSettlementTaxByGovernor;
+                    result.AddFactor(DefaultPerks.Steward.PriceOfLoyalty.SecondaryBonus * (float)num, DefaultPerks.Steward.PriceOfLoyalty.Name);
+                }
+            }
+            return result;
+        }
+    }
+
     internal class MyPartySizeLimitModel : DefaultPartySizeLimitModel
     {
+        // 部队俘虏限制增益
         public override ExplainedNumber GetPartyPrisonerSizeLimit(PartyBase party, bool includeDescriptions = false)
         {
             if (party.IsMobile && party.MobileParty.IsMainParty && MySettings.Instance.GainPrisonerSizeLimit > 1)
@@ -129,9 +149,9 @@ namespace MB2MultiCheats
         }
     }
 
-    // 部队俘虏招募增益
     internal class MyPrisonerRecruitmentCalculationModel: DefaultPrisonerRecruitmentCalculationModel
     {
+        // 部队俘虏招募增益
         public override int GetConformityChangePerHour(PartyBase party, CharacterObject troopToBoost)
         {
             if (party.IsMobile && party.MobileParty.IsMainParty && MySettings.Instance.GainPrisonerRecruitmentRate > 1)
@@ -173,9 +193,9 @@ namespace MB2MultiCheats
         }
     }
 
-    // 战争岂是儿戏
     internal class MyDiplomacyModel: DefaultDiplomacyModel
     {
+        // 战争岂是儿戏
         public override int GetInfluenceCostOfProposingPeace(Clan proposingClan)
         {
             Clan playerClan = Clan.PlayerClan;

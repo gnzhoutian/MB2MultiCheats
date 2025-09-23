@@ -73,6 +73,9 @@
         <string id="mcConfigSettlementText2" text="每日建设奖励" />
         <string id="mcConfigSettlementDesc2" text="家族定居点储备资金每日建设速度奖励，默认为1倍，推荐2倍" />
 
+        <string id="mcConfigSettlementText3" text="总督税收增益" />
+        <string id="mcConfigSettlementDesc3" text="家族定居点总督税收加成倍率，默认为1倍，推荐2倍" />
+
         <string id="mcConfigBattle" text="战役" />
         <string id="mcConfigBattleText1" text="部队最大俘虏增益" />
         <string id="mcConfigBattleDesc1" text="提升玩家部队最大俘虏人数，默认为1倍，推荐2倍" />
