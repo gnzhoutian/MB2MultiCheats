@@ -3,7 +3,7 @@
     <NPCCharacter
         id="mc_troop_dragon_guard"
         default_group="HorseArcher"
-        level="48"
+        level="31"
         name="{=mcTroopDragonGuard}Dragon Guard"
         occupation="Soldier"
         culture="Culture.ashigaru">
