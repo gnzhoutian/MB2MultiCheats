@@ -31,23 +31,8 @@ namespace MB2MultiCheats
         {
             if (winner != null && winner.IsHero && winner.IsPlayerCharacter)
             {
-                int min = MySettings.Instance.ExtraRewardTroopMin;
-                int range = MySettings.Instance.ExtraRewardTroopRange;
                 int rate = MySettings.Instance.ExtraRewardItemRate;
-
-                int num = Math.Min(MCRand.RandNum(min, range),MobileParty.MainParty.LimitedPartySize - MobileParty.MainParty.Party.NumberOfAllMembers);
-
                 List<string> reward_items = new List<string>() { "mc_item_dragon_bracer", "mc_item_eagle_feather_arrows"};
-
-                if (num > 0)
-                {
-                    CharacterObject character_obj = MBObjectManager.Instance.GetObject<CharacterObject>("mc_troop_dragon_guard");
-                    MobileParty.MainParty.AddElementToMemberRoster(character_obj, num);
-
-                    MBTextManager.SetTextVariable("MC_Main_Reward_Troop_Name", character_obj.ToString());
-                    MBTextManager.SetTextVariable("MC_Main_Reward_Troop_Num", num.ToString());
-                    MCLog.Info("{=mcMainBehaviorRewardTroop}{MC_Main_Reward_Troop_Num} {MC_Main_Reward_Troop_Name} admire your heroic spirit and decide to follow you!");
-                }
 
                 foreach (string reward_item in reward_items)
                 {
