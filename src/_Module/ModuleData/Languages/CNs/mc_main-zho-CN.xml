@@ -77,17 +77,20 @@
         <string id="mcConfigSettlementDesc3" text="家族定居点总督税收加成倍率，默认为1倍，推荐2倍" />
 
         <string id="mcConfigBattle" text="战役" />
-        <string id="mcConfigBattleText1" text="部队最大俘虏增益" />
-        <string id="mcConfigBattleDesc1" text="提升玩家部队最大俘虏人数，默认为1倍，推荐2倍" />
+        <string id="mcConfigBattleText1" text="家族同伴人数增益" />
+        <string id="mcConfigBattleDesc1" text="提升玩家家族最大同伴人数，默认为1倍，推荐2倍" />
 
-        <string id="mcConfigBattleText2" text="部队俘虏招募增益" />
-        <string id="mcConfigBattleDesc2" text="提升玩家部队俘虏招募速度，默认为1倍，推荐2倍" />
+        <string id="mcConfigBattleText2" text="部队最大俘虏增益" />
+        <string id="mcConfigBattleDesc2" text="提升玩家部队最大俘虏人数，默认为1倍，推荐2倍" />
 
-        <string id="mcConfigBattleText3" text="战利品价值增益概率" />
-        <string id="mcConfigBattleDesc3" text="提升战利品最高价值，并均分优质前缀，默认为0%，推荐20%" />
+        <string id="mcConfigBattleText3" text="部队俘虏招募增益" />
+        <string id="mcConfigBattleDesc3" text="提升玩家部队俘虏招募速度，默认为1倍，推荐2倍" />
 
-        <string id="mcConfigBattleText4" text="战争岂是儿戏" />
-        <string id="mcConfigBattleDesc4" text="玩家家族等级达到六级后，玩家势力或敌对势力提议和平时，影响力消耗加成倍率，默认为1倍，推荐20倍" />
+        <string id="mcConfigBattleText4" text="战利品价值增益概率" />
+        <string id="mcConfigBattleDesc4" text="提升战利品最高价值，并均分优质前缀，默认为0%，推荐20%" />
+
+        <string id="mcConfigBattleText5" text="战争岂是儿戏" />
+        <string id="mcConfigBattleDesc5" text="玩家家族等级达到六级后，玩家势力或敌对势力提议和平时，影响力消耗加成倍率，默认为1倍，推荐20倍" />
 
         <string id="mcConfigEncyclopedia" text="百科全书" />
         <string id="mcConfigEncyclopediaText1" text="启用英雄信使" />

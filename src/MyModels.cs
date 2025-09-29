@@ -132,6 +132,19 @@ namespace MB2MultiCheats
         }
     }
 
+    internal class MyClanTierModel : DefaultClanTierModel
+    {
+        // 同伴人数限制增益
+        public override int GetCompanionLimit(Clan clan)
+        {
+            if (clan == Clan.PlayerClan)
+            {
+                return base.GetCompanionLimit(clan) * MySettings.Instance.GainCompanionSizeLimit;
+            }
+            return base.GetCompanionLimit(clan);
+        }
+    }
+
     internal class MyPartySizeLimitModel : DefaultPartySizeLimitModel
     {
         // 部队俘虏限制增益

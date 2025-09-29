@@ -107,22 +107,27 @@ namespace MB2MultiCheats
         public int GainSettlementTaxByGovernor { get; set; } = 0;
 
         [SettingPropertyInteger("{=mcConfigBattleText1}Gain prisoner size limit", 1, 10, Order = 0, RequireRestart = false,
-                    HintText = "{=mcConfigBattleDesc1}Increase the MainParty of prisoner size limit, the default is 1x, and 2x is recommended")]
+            HintText = "{=mcConfigBattleDesc1}Increase the MainClan of companion size limit, the default is 1x, and 2x is recommended")]
+        [SettingPropertyGroup("{=mcConfigBattle}Battle", GroupOrder = 5)]
+        public int GainCompanionSizeLimit { get; set; } = 1;
+
+        [SettingPropertyInteger("{=mcConfigBattleText2}Gain prisoner size limit", 1, 10, Order = 1, RequireRestart = false,
+                    HintText = "{=mcConfigBattleDesc2}Increase the MainParty of prisoner size limit, the default is 1x, and 2x is recommended")]
         [SettingPropertyGroup("{=mcConfigBattle}Battle", GroupOrder = 5)]
         public int GainPrisonerSizeLimit { get; set; } = 1;
 
-        [SettingPropertyInteger("{=mcConfigBattleText2}Gain prisoner recruitment rate", 1, 10, Order = 1, RequireRestart = false,
-                    HintText = "{=mcConfigBattleDesc2}Increase the MainParty of prisoner recruitment rate, the default is 1x, and 2x is recommended")]
+        [SettingPropertyInteger("{=mcConfigBattleText3}Gain prisoner recruitment rate", 1, 10, Order = 2, RequireRestart = false,
+                    HintText = "{=mcConfigBattleDesc3}Increase the MainParty of prisoner recruitment rate, the default is 1x, and 2x is recommended")]
         [SettingPropertyGroup("{=mcConfigBattle}Battle", GroupOrder = 5)]
         public int GainPrisonerRecruitmentRate { get; set; } = 1;
 
-        [SettingPropertyInteger("{=mcConfigBattleText3}Gain looted item rate", 0, 100, Order = 2, RequireRestart = false,
-            HintText = "{=mcConfigBattleDesc3}Increase the probability of high-quality and high-value in loot reward, and the high-quality prefix is evenly distributed, the default is 0%, and 20% is recommended")]
+        [SettingPropertyInteger("{=mcConfigBattleText4}Gain looted item rate", 0, 100, Order = 3, RequireRestart = false,
+            HintText = "{=mcConfigBattleDesc4}Increase the probability of high-quality and high-value in loot reward, and the high-quality prefix is evenly distributed, the default is 0%, and 20% is recommended")]
         [SettingPropertyGroup("{=mcConfigBattle}Battle", GroupOrder = 5)]
         public int GainLootedItemRate { get; set; } = 0;
 
-        [SettingPropertyInteger("{=mcConfigBattleText4}War is not joke", 1, 100, Order = 3, RequireRestart = false,
-                    HintText = "{=mcConfigBattleDesc4}Increase influence cost when the country clan or the enemy clan consider peace after player tier reaches six, the default is 1x, and 20x is recommended")]
+        [SettingPropertyInteger("{=mcConfigBattleText5}War is not joke", 1, 100, Order = 4, RequireRestart = false,
+                    HintText = "{=mcConfigBattleDesc5}Increase influence cost when the country clan or the enemy clan consider peace after player tier reaches six, the default is 1x, and 20x is recommended")]
         [SettingPropertyGroup("{=mcConfigBattle}Battle", GroupOrder = 5)]
         public int WarIsNoJoke { get; set; } = 1;
 
