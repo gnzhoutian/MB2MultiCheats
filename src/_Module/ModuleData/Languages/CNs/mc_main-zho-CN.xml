@@ -10,7 +10,7 @@
 
         <!-- 主体文本 -->
         <string id="mcMainPatchWeaponDesignValue" text="价值: " />
-        <string id="mcMainBehaviorRewardItem" text="您在竞技大赛中表现出色，额外奖励：{MC_Main_Reward_Item_Name}" />
+        <string id="mcMainBehaviorRewardItem" text="您在竞技大赛中表现出色，额外奖励：{MC_Main_Reward_Item_Name}x{MC_Main_Reward_Item_Num}" />
         <string id="mcMainBehaviorRewardLoyalty" text="家族定居点忠诚：{MC_Main_Reward_Loyalty_Name} {MC_Main_Reward_Loyalty_Now}(+{MC_Main_Reward_Loyalty_Add})" />
         <string id="mcMainBehaviorActivePerk" text="{MC_Main_Active_Perk_Hero} 激活特性 {MC_Main_Active_Perk_Name}" />
         <string id="mcMainBehaviorRewardPoints" text="{MC_Main_Reward_Points_Hero} 追加等级奖励：属性{MC_Main_Reward_Points_Attr}点，专精{MC_Main_Reward_Points_Focus}点" />

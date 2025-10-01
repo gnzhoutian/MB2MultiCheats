@@ -12,7 +12,6 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
-using MCM.Abstractions.Base.Global;
 
 namespace MB2MultiCheats
 {
@@ -41,11 +40,13 @@ namespace MB2MultiCheats
                 {
                     if (MCRand.RandBool(rate))
                     {
+                        int item_num = MCRand.RandNum(1, range);
                         ItemObject item_obj = MBObjectManager.Instance.GetObject<ItemObject>(reward_item);
-                        MobileParty.MainParty.ItemRoster.AddToCounts(item_obj, MCRand.RandNum(1, range));
+                        MobileParty.MainParty.ItemRoster.AddToCounts(item_obj, item_num);
 
                         MBTextManager.SetTextVariable("MC_Main_Reward_Item_Name", item_obj.Name.ToString());
-                        MCLog.Info("{=mcMainBehaviorRewardItem}You performed excellent in the competition and received additional rewards: {MC_Main_Reward_Item_Name}");
+                        MBTextManager.SetTextVariable("MC_Main_Reward_Item_Num", item_num.ToString());
+                        MCLog.Info("{=mcMainBehaviorRewardItem}You performed excellent in the competition and received additional rewards: {MC_Main_Reward_Item_Name}x{MC_Main_Reward_Item_Num}");
                     }
                 }
             }
