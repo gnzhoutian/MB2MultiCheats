@@ -11,10 +11,10 @@
         Type="HandArmor">
         <ItemComponent>
             <Armor
-                head_armor="120"
-                body_armor="120"
-                leg_armor="120"
-                arm_armor="120"
+                head_armor="240"
+                body_armor="240"
+                leg_armor="240"
+                arm_armor="240"
                 covers_hands="false"
                 modifier_group="plate"
                 material_type="Plate" />
@@ -31,7 +31,7 @@
         holster_mesh_with_weapon="arrow_bl_c_quiver"
         is_merchandise="false"
         value="480000"
-        weight="0.01"
+        weight="0.05"
         flying_mesh="arrow_bl_flying"
         appearance="1"
         Type="Arrows"
@@ -45,8 +45,8 @@
                 speed_rating="0"
                 physics_material="missile"
                 weapon_length="80"
-                missile_speed="120"
-                thrust_damage="120"
+                missile_speed="240"
+                thrust_damage="240"
                 thrust_damage_type="Blunt"
                 item_usage="arrow_right"
                 passby_sound_code="event:/mission/combat/missile/passby"
