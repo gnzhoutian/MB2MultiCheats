@@ -26,10 +26,15 @@ namespace MB2MultiCheats
 
         public override string FormatType { get; } = "json";
 
-        [SettingPropertyInteger("{=mcConfigTournamentText1}Reward probability for item", 0, 100, Order = 2, RequireRestart = false,
+        [SettingPropertyInteger("{=mcConfigTournamentText1}Reward probability for item", 0, 100, Order = 0, RequireRestart = false,
             HintText = "{=mcConfigTournamentDesc1}The probability of rewarding god-level items, the default is 0%, and 20% is recommended")]
         [SettingPropertyGroup("{=mcConfigTournament}Tournament", GroupOrder = 0)]
         public int ExtraRewardItemRate { get; set; } = 0;
+
+        [SettingPropertyInteger("{=mcConfigTournamentText2}Reward range for item", 0, 9, Order = 1, RequireRestart = false,
+            HintText = "{=mcConfigTournamentDesc2}The extra random num of item rewarded, the default is 0, and 2 is recommended")]
+        [SettingPropertyGroup("{=mcConfigTournament}Tournament", GroupOrder = 0)]
+        public int ExtraRewardItemRange { get; set; } = 0;
 
         [SettingPropertyInteger("{=mcConfigSkillLevelupText1}Max attribute", 10, 20, Order = 0, RequireRestart = false,
             HintText = "{=mcConfigSkillLevelupDesc1}Six dimensions max attribute, the default is 10, and 20 is recommended")]

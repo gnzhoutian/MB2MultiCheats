@@ -23,6 +23,9 @@
         <string id="mcConfigTournamentText1" text="物品奖励概率" />
         <string id="mcConfigTournamentDesc1" text="神级物品奖励概率，默认为0%，推荐20%" />
 
+        <string id="mcConfigTournamentText2" text="物品奖励区间" />
+        <string id="mcConfigTournamentDesc2" text="神级物品奖励数量额外随机区间，默认为0名，推荐2个" />
+
         <string id="mcConfigSkillLevelup" text="技能升级" />
         <string id="mcConfigSkillLevelupText1" text="六维最大属性" />
         <string id="mcConfigSkillLevelupDesc1" text="六维最大属性点，默认为10点，推荐20点" />

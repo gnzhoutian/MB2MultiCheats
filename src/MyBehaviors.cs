@@ -12,6 +12,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
+using MCM.Abstractions.Base.Global;
 
 namespace MB2MultiCheats
 {
@@ -32,6 +33,8 @@ namespace MB2MultiCheats
             if (winner != null && winner.IsHero && winner.IsPlayerCharacter)
             {
                 int rate = MySettings.Instance.ExtraRewardItemRate;
+                int range = MySettings.Instance.ExtraRewardItemRange;
+
                 List<string> reward_items = new List<string>() { "mc_item_dragon_bracer", "mc_item_eagle_feather_arrows"};
 
                 foreach (string reward_item in reward_items)
@@ -39,7 +42,7 @@ namespace MB2MultiCheats
                     if (MCRand.RandBool(rate))
                     {
                         ItemObject item_obj = MBObjectManager.Instance.GetObject<ItemObject>(reward_item);
-                        MobileParty.MainParty.ItemRoster.AddToCounts(item_obj, 1);
+                        MobileParty.MainParty.ItemRoster.AddToCounts(item_obj, MCRand.RandNum(1, range));
 
                         MBTextManager.SetTextVariable("MC_Main_Reward_Item_Name", item_obj.Name.ToString());
                         MCLog.Info("{=mcMainBehaviorRewardItem}You performed excellent in the competition and received additional rewards: {MC_Main_Reward_Item_Name}");
