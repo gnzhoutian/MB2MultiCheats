@@ -3,42 +3,40 @@
     <Item
         id="mc_item_dragon_bracer"
         name="{=mcItemDragonBracer}Dragon Bracer"
-        mesh="sho_unarmored_kote_a_8"
+        mesh="khuzait_heavy_armor_bracer"
         is_merchandise="false"
         value="480000"
         weight="1.2"
-        difficulty="0"
-        appearance="1"
+        appearance="7"
         Type="HandArmor">
         <ItemComponent>
-            <Armor 
-                head_armor="120"
-                body_armor="120"
-                leg_armor="120"
-                arm_armor="120"
-                modifier_group="cloth"
-                material_type="Cloth"/>
+            <Armor
+                head_armor="240"
+                body_armor="240"
+                leg_armor="240"
+                arm_armor="240"
+                covers_hands="false"
+                modifier_group="plate"
+                material_type="Plate" />
         </ItemComponent>
-        <Flags Civilian="true"/>
+        <Flags Civilian="true" />
     </Item>
     <Item
         id="mc_item_eagle_feather_arrows"
         name="{=mcItemEagleFeatherArrows}Eagle Feather Arrows"
         body_name="bo_capsule_arrow"
         holster_body_name="bo_axe_short"
-        mesh="sho_piercing_arrow"
-        holster_mesh="sho_hankyu_a"
-        holster_mesh_with_weapon="sho_hankyu_a"
-        subtype="arrows"
-        flying_mesh="sho_piercing_arrow"
+        mesh="arrow_bl_c"
+        holster_mesh="arrow_bl_c_quiver"
+        holster_mesh_with_weapon="arrow_bl_c_quiver"
         is_merchandise="false"
         value="480000"
-        weight="0.01"
-        difficulty="0"
+        weight="0.05"
+        flying_mesh="arrow_bl_flying"
         appearance="1"
         Type="Arrows"
-        item_holsters="sho_ebira"
-        holster_position_shift="0,0,0">
+        item_holsters="quiver_back_middle:quiver_bolts_2:quiver_bolts"
+        holster_position_shift="0.0,0.0,0.15">
         <ItemComponent>
             <Weapon
                 weapon_class="Arrow"
@@ -46,25 +44,25 @@
                 thrust_speed="0"
                 speed_rating="0"
                 physics_material="missile"
-                missile_speed="120"
-                weapon_length="97"
-                thrust_damage="120"
+                weapon_length="80"
+                missile_speed="240"
+                thrust_damage="240"
                 thrust_damage_type="Blunt"
                 item_usage="arrow_right"
                 passby_sound_code="event:/mission/combat/missile/passby"
                 rotation="0, -80, 25"
                 sticking_position="0,-0.97,0"
                 sticking_rotation="90,0,0"
-                center_of_mass="0,0.0,-0.13"
+                center_of_mass="0,0,-0.13"
                 modifier_group="arrow">
-                <WeaponFlags 
+                <WeaponFlags
                     Consumable="true"
                     CanPenetrateShield="true"
                     MultiplePenetration="true"
                     AmmoSticksWhenShot="true"
-                    AmmoBreaksOnBounceBack="true"/>
+                    AmmoBreaksOnBounceBack="true" />
             </Weapon>
         </ItemComponent>
-        <Flags/>
+        <Flags />
     </Item>
 </Items>

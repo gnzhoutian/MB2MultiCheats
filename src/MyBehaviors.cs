@@ -31,33 +31,22 @@ namespace MB2MultiCheats
         {
             if (winner != null && winner.IsHero && winner.IsPlayerCharacter)
             {
-                int min = MySettings.Instance.ExtraRewardTroopMin;
-                int range = MySettings.Instance.ExtraRewardTroopRange;
                 int rate = MySettings.Instance.ExtraRewardItemRate;
-
-                int num = Math.Min(MCRand.RandNum(min, range),MobileParty.MainParty.LimitedPartySize - MobileParty.MainParty.Party.NumberOfAllMembers);
+                int range = MySettings.Instance.ExtraRewardItemRange;
 
                 List<string> reward_items = new List<string>() { "mc_item_dragon_bracer", "mc_item_eagle_feather_arrows"};
-
-                if (num > 0)
-                {
-                    CharacterObject character_obj = MBObjectManager.Instance.GetObject<CharacterObject>("mc_troop_dragon_guard");
-                    MobileParty.MainParty.AddElementToMemberRoster(character_obj, num);
-
-                    MBTextManager.SetTextVariable("MC_Main_Reward_Troop_Name", character_obj.ToString());
-                    MBTextManager.SetTextVariable("MC_Main_Reward_Troop_Num", num.ToString());
-                    MCLog.Info("{=mcMainBehaviorRewardTroop}{MC_Main_Reward_Troop_Num} {MC_Main_Reward_Troop_Name} admire your heroic spirit and decide to follow you!");
-                }
 
                 foreach (string reward_item in reward_items)
                 {
                     if (MCRand.RandBool(rate))
                     {
+                        int item_num = MCRand.RandNum(1, range);
                         ItemObject item_obj = MBObjectManager.Instance.GetObject<ItemObject>(reward_item);
-                        MobileParty.MainParty.ItemRoster.AddToCounts(item_obj, 1);
+                        MobileParty.MainParty.ItemRoster.AddToCounts(item_obj, item_num);
 
                         MBTextManager.SetTextVariable("MC_Main_Reward_Item_Name", item_obj.Name.ToString());
-                        MCLog.Info("{=mcMainBehaviorRewardItem}You performed excellent in the competition and received additional rewards: {MC_Main_Reward_Item_Name}");
+                        MBTextManager.SetTextVariable("MC_Main_Reward_Item_Num", item_num.ToString());
+                        MCLog.Info("{=mcMainBehaviorRewardItem}You performed excellent in the competition and received additional rewards: {MC_Main_Reward_Item_Name}x{MC_Main_Reward_Item_Num}");
                     }
                 }
             }

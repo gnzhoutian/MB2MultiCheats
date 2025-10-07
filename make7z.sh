@@ -13,7 +13,7 @@ make_mod(){
     mod_flag=$2
 
     cp -af src/_Module tmpbuild/${mod_name}
-    cp -af src/_Module${mod_flag}/* tmpbuild/${mod_name}/
+    # cp -af src/_Module${mod_flag}/* tmpbuild/${mod_name}/
 
     pushd tmpbuild/${mod_name}
         sed -i 's!MOD_NAME!'${mod_name}'!g' SubModule.xml
@@ -40,8 +40,7 @@ make_mod(){
 # main
 if [ "$1"x != ""x ];then
     make_mod MB2MultiCheats Origin
-    make_mod MB2MultiCheatsSanGuo SanGuo
-    make_mod MB2MultiCheatsShokuho Shokuho
+    date
 else
     echo "入参错误，示例: ./make7z.sh 1.2.0/1.2.0-debug"
 fi

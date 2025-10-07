@@ -38,15 +38,5 @@
                 <GameType value="ShokuhoCampaign"/>
             </IncludedGameTypes>
         </XmlNode>
-        <XmlNode>
-            <XmlName id="NPCCharacters" path="troops"/>
-            <IncludedGameTypes>
-                <GameType value="Campaign"/>
-                <GameType value="CampaignStoryMode"/>
-                <GameType value="CustomGame"/>
-                <GameType value="EditorGame"/>
-                <GameType value="ShokuhoCampaign"/>
-            </IncludedGameTypes>
-        </XmlNode>
     </Xmls>
 </Module>

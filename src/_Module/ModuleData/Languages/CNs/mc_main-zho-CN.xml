@@ -4,17 +4,13 @@
         <tag language="简体中文" />
     </tags>
     <strings>
-        <!-- 新增兵种 -->
-        <string id="mcTroopDragonGuard" text="龙啸卫" />
-
         <!-- 新增物品 -->
         <string id="mcItemDragonBracer" text="龙吟腕" />
         <string id="mcItemEagleFeatherArrows" text="雕翎箭" />
 
         <!-- 主体文本 -->
         <string id="mcMainPatchWeaponDesignValue" text="价值: " />
-        <string id="mcMainBehaviorRewardTroop" text="{MC_Main_Reward_Troop_Num}名{MC_Main_Reward_Troop_Name}仰慕您的英姿，决定追随您！" />
-        <string id="mcMainBehaviorRewardItem" text="您在竞技大赛中表现出色，额外奖励：{MC_Main_Reward_Item_Name}" />
+        <string id="mcMainBehaviorRewardItem" text="您在竞技大赛中表现出色，额外奖励：{MC_Main_Reward_Item_Name}x{MC_Main_Reward_Item_Num}" />
         <string id="mcMainBehaviorRewardLoyalty" text="家族定居点忠诚：{MC_Main_Reward_Loyalty_Name} {MC_Main_Reward_Loyalty_Now}(+{MC_Main_Reward_Loyalty_Add})" />
         <string id="mcMainBehaviorActivePerk" text="{MC_Main_Active_Perk_Hero} 激活特性 {MC_Main_Active_Perk_Name}" />
         <string id="mcMainBehaviorRewardPoints" text="{MC_Main_Reward_Points_Hero} 追加等级奖励：属性{MC_Main_Reward_Points_Attr}点，专精{MC_Main_Reward_Points_Focus}点" />
@@ -24,14 +20,11 @@
 
         <!-- 设置菜单 -->
         <string id="mcConfigTournament" text="竞技大赛" />
-        <string id="mcConfigTournamentText1" text="兵种奖励基数" />
-        <string id="mcConfigTournamentDesc1" text="亲卫兵种奖励最少数量，默认为0名，推荐2名" />
+        <string id="mcConfigTournamentText1" text="物品奖励概率" />
+        <string id="mcConfigTournamentDesc1" text="神级物品奖励概率，默认为0%，推荐20%" />
 
-        <string id="mcConfigTournamentText2" text="兵种奖励区间" />
-        <string id="mcConfigTournamentDesc2" text="亲卫兵种奖励随机区间，默认为0名，推荐2名" />
-
-        <string id="mcConfigTournamentText3" text="物品奖励概率" />
-        <string id="mcConfigTournamentDesc3" text="神级物品奖励概率，默认为0%，推荐20%" />
+        <string id="mcConfigTournamentText2" text="物品奖励区间" />
+        <string id="mcConfigTournamentDesc2" text="神级物品奖励数量额外随机区间，默认为0名，推荐2个" />
 
         <string id="mcConfigSkillLevelup" text="技能升级" />
         <string id="mcConfigSkillLevelupText1" text="六维最大属性" />
@@ -73,18 +66,24 @@
         <string id="mcConfigSettlementText2" text="每日建设奖励" />
         <string id="mcConfigSettlementDesc2" text="家族定居点储备资金每日建设速度奖励，默认为1倍，推荐2倍" />
 
+        <string id="mcConfigSettlementText3" text="总督税收增益" />
+        <string id="mcConfigSettlementDesc3" text="家族定居点总督税收加成倍率，默认为1倍，推荐2倍" />
+
         <string id="mcConfigBattle" text="战役" />
-        <string id="mcConfigBattleText1" text="部队最大俘虏增益" />
-        <string id="mcConfigBattleDesc1" text="提升玩家部队最大俘虏人数，默认为1倍，推荐2倍" />
+        <string id="mcConfigBattleText1" text="家族同伴人数增益" />
+        <string id="mcConfigBattleDesc1" text="提升玩家家族最大同伴人数，默认为1倍，推荐2倍" />
 
-        <string id="mcConfigBattleText2" text="部队俘虏招募增益" />
-        <string id="mcConfigBattleDesc2" text="提升玩家部队俘虏招募速度，默认为1倍，推荐2倍" />
+        <string id="mcConfigBattleText2" text="部队最大俘虏增益" />
+        <string id="mcConfigBattleDesc2" text="提升玩家部队最大俘虏人数，默认为1倍，推荐2倍" />
 
-        <string id="mcConfigBattleText3" text="战利品价值增益概率" />
-        <string id="mcConfigBattleDesc3" text="提升战利品最高价值，并均分优质前缀，默认为0%，推荐20%" />
+        <string id="mcConfigBattleText3" text="部队俘虏招募增益" />
+        <string id="mcConfigBattleDesc3" text="提升玩家部队俘虏招募速度，默认为1倍，推荐2倍" />
 
-        <string id="mcConfigBattleText4" text="战争岂是儿戏" />
-        <string id="mcConfigBattleDesc4" text="玩家家族等级达到六级后，玩家势力或敌对势力提议和平时，影响力消耗加成倍率，默认为1倍，推荐20倍" />
+        <string id="mcConfigBattleText4" text="战利品价值增益概率" />
+        <string id="mcConfigBattleDesc4" text="提升战利品最高价值，并均分优质前缀，默认为0%，推荐20%" />
+
+        <string id="mcConfigBattleText5" text="战争岂是儿戏" />
+        <string id="mcConfigBattleDesc5" text="玩家家族等级达到六级后，玩家势力或敌对势力提议和平时，影响力消耗加成倍率，默认为1倍，推荐20倍" />
 
         <string id="mcConfigEncyclopedia" text="百科全书" />
         <string id="mcConfigEncyclopediaText1" text="启用英雄信使" />
