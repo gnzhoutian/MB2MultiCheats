@@ -153,7 +153,7 @@ namespace MB2MultiCheats
             if (party.IsMobile && party.MobileParty.IsMainParty && MySettings.Instance.GainPrisonerSizeLimit > 1)
             {
                 ExplainedNumber rst = base.GetPartyPrisonerSizeLimit(party, includeDescriptions);
-                rst.Add(rst.BaseNumber * (float)(MySettings.Instance.GainPrisonerSizeLimit - 1), new TextObject("{=mcGainPrisonerSizeLimit}Prisoner extra gain"));
+                rst.Add(rst.BaseNumber * (float)(MySettings.Instance.GainPrisonerSizeLimit - 1), new TextObject("{=mcMainGainPrisonerSizeLimit}Prisoner extra gain"));
                 return rst;
             }
             return base.GetPartyPrisonerSizeLimit(party, includeDescriptions);

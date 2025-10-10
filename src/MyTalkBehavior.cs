@@ -55,8 +55,8 @@ namespace MB2MultiCheats
             if (hero == null) return;
             cost = hero.HasMet ? 500 : 2000;
 
-            MBTextManager.SetTextVariable("MC_Send_Messenger_Cost", cost.ToString());
-            MCSendMessengerText = new TextObject("{=mcSendMessengerText}Send Messenger({MC_Send_Messenger_Cost} denars)").ToString();
+            MBTextManager.SetTextVariable("MC_Main_Send_Messenger_Cost", cost.ToString());
+            MCSendMessengerText = new TextObject("{=mcMainSendMessengerText}Send Messenger({MC_Main_Send_Messenger_Cost} denars)").ToString();
         }
 
         [DataSourceProperty]
@@ -69,8 +69,8 @@ namespace MB2MultiCheats
             MyTalkBehavior.SendMessenger(hero);
             OnPropertyChanged("MCCanSendNow");
 
-            MBTextManager.SetTextVariable("MC_Send_Messenger_Hero", hero.Name.ToString());
-            MCLog.Info("{=mcSendMessengerClick}The messenger has departed. You will soon meet {MC_Send_Messenger_Hero}...");
+            MBTextManager.SetTextVariable("MC_Main_Send_Messenger_Hero", hero.Name.ToString());
+            MCLog.Info("{=mcMainSendMessengerClick}The messenger has departed. You will soon meet {MC_Main_Send_Messenger_Hero}...");
         }
 
         [DataSourceProperty]
@@ -156,7 +156,7 @@ namespace MB2MultiCheats
 
         public int Hours { get; protected set; }
 
-        private const float SpeedPerHour = 30f;
+        private const float SpeedPerHour = 5f;
 
         public Messenger(Hero hero)
         {

@@ -14,9 +14,9 @@
         <string id="mcMainBehaviorRewardLoyalty" text="家族定居点忠诚：{MC_Main_Reward_Loyalty_Name} {MC_Main_Reward_Loyalty_Now}(+{MC_Main_Reward_Loyalty_Add})" />
         <string id="mcMainBehaviorActivePerk" text="{MC_Main_Active_Perk_Hero} 激活特性 {MC_Main_Active_Perk_Name}" />
         <string id="mcMainBehaviorRewardPoints" text="{MC_Main_Reward_Points_Hero} 追加等级奖励：属性{MC_Main_Reward_Points_Attr}点，专精{MC_Main_Reward_Points_Focus}点" />
-        <string id="mcSendMessengerText" text="发送信使({MC_Send_Messenger_Cost}第纳尔)" />
-        <string id="mcSendMessengerClick" text="信使已出发，您即将与{MC_Send_Messenger_Hero}会面..." />
-        <string id="mcGainPrisonerSizeLimit" text="俘虏额外增益" />
+        <string id="mcMainSendMessengerText" text="发送信使({MC_Main_Send_Messenger_Cost}第纳尔)" />
+        <string id="mcMainSendMessengerClick" text="信使已出发，您即将与{MC_Main_Send_Messenger_Hero}会面..." />
+        <string id="mcMainGainPrisonerSizeLimit" text="俘虏额外增益" />
 
         <!-- 设置菜单 -->
         <string id="mcConfigTournament" text="竞技大赛" />
